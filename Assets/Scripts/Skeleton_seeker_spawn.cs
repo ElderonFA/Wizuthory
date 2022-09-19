@@ -6,10 +6,14 @@ public class Skeleton_seeker_spawn : MonoBehaviour
 {
     [SerializeField] private Animator anim;
     [SerializeField] private NpcMoving npcMoving;
+    [SerializeField] private Health selfHealth;
+
+    [SerializeField] private GameObject attackBlock;
 
     void OnTriggerEnter2D(Collider2D other)
     {
-        if (other.tag == "Player" && anim.enabled == false)
+        selfHealth.onPersonDead += DisableMovement;
+        if (other.tag == "Player" && anim.enabled == false && selfHealth.IsAlive)
         {
             anim.enabled = true;
         }
@@ -28,5 +32,13 @@ public class Skeleton_seeker_spawn : MonoBehaviour
     public void SetCanMoveTrue()
     {
         npcMoving.SetCanMove();
+    }
+
+    private void DisableMovement()
+    {
+        var selfScript = gameObject.GetComponent<Skeleton_seeker_spawn>();
+        Destroy(selfScript);
+        
+        Destroy(attackBlock);
     }
 }

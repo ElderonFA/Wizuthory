@@ -10797,6 +10797,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   anim: {fileID: 1770927566}
   npcMoving: {fileID: 0}
+  selfHealth: {fileID: 0}
+  attackBlock: {fileID: 0}
 --- !u!61 &1400275324
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -13054,6 +13056,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   anim: {fileID: 1770927566}
   npcMoving: {fileID: 1064002223}
+  selfHealth: {fileID: 708405307}
+  attackBlock: {fileID: 1292498189}
 --- !u!1001 &1775016106
 PrefabInstance:
   m_ObjectHideFlags: 0

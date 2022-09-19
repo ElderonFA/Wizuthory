@@ -1,0 +1,66 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!78 &1
+TagManager:
+  serializedVersion: 2
+  tags:
+  - Death
+  - Enemy
+  - DamageAttack
+  - HitBox
+  - WalkingLimit
+  layers:
+  - Default
+  - TransparentFX
+  - Ignore Raycast
+  - 
+  - Water
+  - UI
+  - Borders
+  - Camera
+  - Player
+  - NotColidePlayer
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  m_SortingLayers:
+  - name: Confiners
+    uniqueID: 3608011807
+    locked: 0
+  - name: Back objects
+    uniqueID: 2703820585
+    locked: 0
+  - name: Ground
+    uniqueID: 2227165415
+    locked: 0
+  - name: Default
+    uniqueID: 0
+    locked: 0
+  - name: Player
+    uniqueID: 3933667089
+    locked: 0
+  - name: Front
+    uniqueID: 4214297409
+    locked: 0
+  - name: Water
+    uniqueID: 3451625955
+    locked: 0

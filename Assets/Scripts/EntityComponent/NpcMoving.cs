@@ -34,8 +34,8 @@ public class NpcMoving : MonoBehaviour
     {
         //Debug.Log("Время ожидания: " + _waitTime);
         //Debug.Log("Время хотьбы: " + _goTime);
-        Debug.Log("Может ходить: " + _canMove);
-        Debug.Log("Преследует игрока: " + _chasePlayer);
+        //Debug.Log("Может ходить: " + _canMove);
+        //Debug.Log("Преследует игрока: " + _chasePlayer);
         UpdateMove();
     }
 

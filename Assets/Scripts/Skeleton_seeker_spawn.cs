@@ -1,5 +1,7 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
+using UnityEditor.Experimental.GraphView;
 using UnityEngine;
 
 public class Skeleton_seeker_spawn : MonoBehaviour
@@ -10,9 +12,15 @@ public class Skeleton_seeker_spawn : MonoBehaviour
 
     [SerializeField] private GameObject attackBlock;
 
+    [SerializeField] private SpriteRenderer selfView;
+
+    public void Update()
+    {
+        Debug.Log(selfHealth.IsAlive);
+    }
+
     void OnTriggerEnter2D(Collider2D other)
     {
-        selfHealth.onPersonDead += DisableMovement;
         if (other.tag == "Player" && anim.enabled == false && selfHealth.IsAlive)
         {
             anim.enabled = true;
@@ -24,21 +32,14 @@ public class Skeleton_seeker_spawn : MonoBehaviour
         anim.SetBool(name, false);
     }
 
-    public void DisableAnimator()
+    public void StartDead()
     {
         anim.enabled = false;
+        selfHealth.KillSelf();
     }
 
     public void SetCanMoveTrue()
     {
         npcMoving.SetCanMove();
-    }
-
-    private void DisableMovement()
-    {
-        var selfScript = gameObject.GetComponent<Skeleton_seeker_spawn>();
-        Destroy(selfScript);
-        
-        Destroy(attackBlock);
     }
 }

@@ -161,8 +161,8 @@ public class PlayerController : MonoBehaviour
             }
         }
 
-        if (Input.GetMouseButtonDown(1))
-            Debug.Log("Pressed secondary button.");
+        /*if (Input.GetMouseButtonDown(1))
+            Debug.Log("Pressed secondary button.");*/
     }
 
     private void UpdateAnimation()

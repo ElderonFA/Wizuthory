@@ -10,4 +10,5 @@ UnityPackages/
 /AssetBundles
 /Library
 .idea
-ProjectSettings/
+/ProjectSettings
+/UserSettings

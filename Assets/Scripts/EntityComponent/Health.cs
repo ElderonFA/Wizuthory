@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+[RequireComponent(typeof(SpriteRenderer))]
 public class Health : MonoBehaviour
 {
     [SerializeField] private float maxHp;
@@ -12,6 +13,8 @@ public class Health : MonoBehaviour
 
     private bool isAlive;
     public bool IsAlive => isAlive;
+
+    private SpriteRenderer personView;
 
     [SerializeField] private Animator anim;
 
@@ -26,6 +29,10 @@ public class Health : MonoBehaviour
         currentHp = maxHp;
         isAlive = true;
         anim.SetBool("isAlive", isAlive);
+
+        personView = transform.parent.gameObject.GetComponent<SpriteRenderer>();
+
+        //onPersonDead += KillSelf;
     }
 
     public void TakeDamage(float damage)
@@ -46,5 +53,32 @@ public class Health : MonoBehaviour
     private void CheckIsAlive()
     {
         isAlive = currentHp > 0 ? true : false;
+    }
+    
+    //Корутина анимации смерти и удаления персонажа со здоровьем
+    private IEnumerator DespawnAnim()
+    {
+        var r = 1f;
+        var g = 1f;
+        var b = 1f;
+        var a = 1f;
+        while(a > 0)
+        {
+            yield return null;
+            g -= Time.deltaTime;
+            b -= Time.deltaTime;
+            a -= Time.deltaTime;
+            
+            personView.color = new Color(r, g, b, a);
+        }
+        
+        StopCoroutine(DespawnAnim());
+        Destroy(transform.parent.gameObject);
+    }
+    
+
+    public void KillSelf()
+    {
+        StartCoroutine(DespawnAnim());
     }
 }

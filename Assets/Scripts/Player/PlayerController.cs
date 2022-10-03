@@ -121,7 +121,7 @@ public class PlayerController : MonoBehaviour
         else
         {
             //В какую сторону смотреть
-            sr.flipX = left ? true : false;
+            sr.flipX = left;
         }
 
         if (go)

@@ -12,6 +12,8 @@ public class NpcMoving : MonoBehaviour
     [SerializeField] private Health npcHealth;
     [SerializeField] private Rigidbody2D rigidBody;
     [SerializeField] private Transform playerTransform;
+    [SerializeField] private Animator animator;
+    [SerializeField] private SpriteRenderer personView;
 
     [Header ("MinMaxDelay")]
     [SerializeField] private float minWaitTime;
@@ -22,20 +24,19 @@ public class NpcMoving : MonoBehaviour
 
     private bool _canMove;
     private bool _chasePlayer;
-    private bool _goLeft = false;
+    private bool _goLeft;
     private bool _takeOppositeLook;
     private Vector2 _actualSpeed;
 
     private float _waitTime;
+    //public bool Stay => _waitTime > 0;
+    
     private float _goTime;
+    //public bool Patrol => _goTime > 0;
 
 
     void FixedUpdate()
     {
-        //Debug.Log("Время ожидания: " + _waitTime);
-        //Debug.Log("Время хотьбы: " + _goTime);
-        //Debug.Log("Может ходить: " + _canMove);
-        //Debug.Log("Преследует игрока: " + _chasePlayer);
         UpdateMove();
     }
 
@@ -47,15 +48,7 @@ public class NpcMoving : MonoBehaviour
 
         if (_chasePlayer)
         {
-            if (playerTransform.position.x <= transform.position.x)
-            {
-                _goLeft = true;
-            }
-            else
-            {
-                _goLeft = false;
-            }
-            
+            animator.SetBool("IsMove", true);
             UpdateActualSpeed();
             rigidBody.AddForce(_actualSpeed);
         }
@@ -63,12 +56,14 @@ public class NpcMoving : MonoBehaviour
         {
             if (_waitTime > 0)
             {
+                animator.SetBool("IsMove", false);
                 _waitTime -= Time.deltaTime;
                 return;
             }
 
             if (_goTime > 0)
             {
+                animator.SetBool("IsMove", true);
                 rigidBody.AddForce(_actualSpeed);
 
                 _goTime -= Time.deltaTime;
@@ -79,21 +74,37 @@ public class NpcMoving : MonoBehaviour
             else
             {
                 UpdateActualSpeed();
-                _goTime = GetTimeDelay(minGoTime, minGoTime);
+                _goTime = GetTimeDelay(minGoTime, maxGoTime);
             }
-        }        
+        } 
+        
+        personView.flipX = _goLeft;
     }
 
     private void UpdateActualSpeed()
     {
-        if (_takeOppositeLook)
+        if (_chasePlayer)
         {
-            _goLeft = _goLeft == true ? false : true;
-            _takeOppositeLook = false;
+            if (playerTransform.position.x <= transform.position.x)
+            {
+                _goLeft = true;
+            }
+            else
+            {
+                _goLeft = false;
+            }
         }
         else
         {
-            _goLeft = Random.Range(0f, 100f) >= 50f ? false : true;
+            if (_takeOppositeLook)
+            {
+                _goLeft = _goLeft == true ? false : true;
+                _takeOppositeLook = false;
+            }
+            else
+            {
+                _goLeft = Random.Range(0f, 100f) >= 50f ? false : true;
+            }
         }
 
         if (_goLeft)
@@ -118,6 +129,7 @@ public class NpcMoving : MonoBehaviour
         if (other.tag == "WalkingLimit" && !_chasePlayer)
         {
             _waitTime = GetTimeDelay(minWaitTime, maxWaitTime);
+            _goTime = 0;
 
             _takeOppositeLook = true;
         }

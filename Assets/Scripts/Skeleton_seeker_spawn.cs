@@ -10,10 +10,6 @@ public class Skeleton_seeker_spawn : MonoBehaviour
     [SerializeField] private NpcMoving npcMoving;
     [SerializeField] private Health selfHealth;
 
-    [SerializeField] private GameObject attackBlock;
-
-    [SerializeField] private SpriteRenderer selfView;
-
     public void Update()
     {
         Debug.Log(selfHealth.IsAlive);

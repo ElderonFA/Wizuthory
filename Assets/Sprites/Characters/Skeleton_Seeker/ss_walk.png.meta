@@ -114,7 +114,133 @@ TextureImporter:
     forceMaximumCompressionQuality_BC6H_BC7: 0
   spriteSheet:
     serializedVersion: 2
-    sprites: []
+    sprites:
+    - serializedVersion: 2
+      name: ss_walk_0
+      rect:
+        serializedVersion: 2
+        x: 21
+        y: 614
+        width: 92
+        height: 84
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 598efa3e4475014488b55f3703d46262
+      internalID: 462587701
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: ss_walk_1
+      rect:
+        serializedVersion: 2
+        x: 22
+        y: 494
+        width: 92
+        height: 85
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 9357a73a251fe5949aae6f9146253296
+      internalID: -28005602
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: ss_walk_2
+      rect:
+        serializedVersion: 2
+        x: 25
+        y: 374
+        width: 84
+        height: 84
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 35139228cc4ff2b4fbd09c35bea64ebd
+      internalID: 891178219
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: ss_walk_3
+      rect:
+        serializedVersion: 2
+        x: 21
+        y: 255
+        width: 92
+        height: 82
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 71db6d3a0032b06458fae71a49b1b0d3
+      internalID: -1353022154
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: ss_walk_4
+      rect:
+        serializedVersion: 2
+        x: 23
+        y: 134
+        width: 87
+        height: 84
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 6512f816f629f0745a69913e3ecf7b11
+      internalID: 854760859
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: ss_walk_5
+      rect:
+        serializedVersion: 2
+        x: 21
+        y: 14
+        width: 92
+        height: 83
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 12b7cb2d2aefa5f4488c4c563ca371b2
+      internalID: 1452986840
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
     outline: []
     physicsShape: []
     bones: []
@@ -125,7 +251,13 @@ TextureImporter:
     edges: []
     weights: []
     secondaryTextures: []
-    nameFileIdTable: {}
+    nameFileIdTable:
+      ss_walk_5: 1452986840
+      ss_walk_4: 854760859
+      ss_walk_0: 462587701
+      ss_walk_2: 891178219
+      ss_walk_3: -1353022154
+      ss_walk_1: -28005602
   spritePackingTag: 
   pSDRemoveMatte: 0
   pSDShowRemoveMatteOption: 0

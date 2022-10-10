@@ -12,7 +12,7 @@ public class Skeleton_seeker_spawn : MonoBehaviour
 
     public void Update()
     {
-        Debug.Log(selfHealth.IsAlive);
+        //Debug.Log(selfHealth.IsAlive);
     }
 
     void OnTriggerEnter2D(Collider2D other)

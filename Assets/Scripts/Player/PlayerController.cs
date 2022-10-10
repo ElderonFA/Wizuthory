@@ -18,6 +18,13 @@ public class PlayerController : MonoBehaviour
     private bool left;
     public bool isLookLeft => left;
     private bool right = true;
+    
+    private bool canMove = true;
+    public void SetCanMove(bool b)
+    {
+        canMove = b;
+    }
+
     private bool go;
     private bool isJump;
 
@@ -57,6 +64,8 @@ public class PlayerController : MonoBehaviour
 
     void FixedUpdate()
     {
+        if (!canMove) return;
+        
         if (health.IsAlive)
             UpdateMove();
 

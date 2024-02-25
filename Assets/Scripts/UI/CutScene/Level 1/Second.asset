@@ -14,15 +14,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   currentCutScene:
     allStep:
-    - text: ...strange sounds...
-      person: 0
-      cameraTarget: {fileID: 0}
-    - text: What is this?
+    - text: Well...
       person: 1
-      cameraTarget: {fileID: 0}
-    - text: RHAAAA!!!
-      person: 2
-      cameraTarget: {fileID: 0}
-    - text: Oh, shit!
+    - text: This is end of cemetry
       person: 1
-      cameraTarget: {fileID: 0}
+    - text: Need move
+      person: 1

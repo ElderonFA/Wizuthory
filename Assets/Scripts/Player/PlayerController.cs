@@ -23,7 +23,7 @@ public class PlayerController : MonoBehaviour
     public void SetCanMove(bool b)
     {
         anim.SetBool("isRunning", false);
-        anim.SetBool("onGround", false);
+        anim.SetBool("onGround", true);
         canMove = b;
     }
 

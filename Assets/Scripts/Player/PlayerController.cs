@@ -22,6 +22,8 @@ public class PlayerController : MonoBehaviour
     private bool canMove = true;
     public void SetCanMove(bool b)
     {
+        anim.SetBool("isRunning", false);
+        anim.SetBool("onGround", false);
         canMove = b;
     }
 
@@ -109,7 +111,7 @@ public class PlayerController : MonoBehaviour
 
 
         //Прыжок
-        if (Input.GetKeyDown(KeyCode.Space) && onGround == true)
+        if (Input.GetKeyDown(KeyCode.Space) && onGround)
         {
             isJump = true;
             attack = false;
@@ -206,13 +208,17 @@ public class PlayerController : MonoBehaviour
 
     void OnTriggerStay2D(Collider2D other)
     {
-        if (other.tag != "Player")
+        if (other.tag != "Player" 
+            && other.tag != "Enemy" 
+            && other.tag != "DamageAttack" 
+            && other.tag != "HitBox"
+            && other.tag != "WalkingLimit")
             onGround = true;
     }
 
     void OnTriggerExit2D(Collider2D other)
     {
-        if (other.tag != "Player")
+        if (other.tag != "Player" && other.tag != "Enemy"&&  other.tag != "DamageAttack" && other.tag != "HitBox")
             onGround = false;
     }
 

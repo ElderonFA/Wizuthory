@@ -10,7 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 7219764541673435329}
   - component: {fileID: 4553831512778943499}
-  m_Layer: 9
+  m_Layer: 0
   m_Name: WalkingLimit
   m_TagString: WalkingLimit
   m_Icon: {fileID: 5721338939258241955, guid: 0000000000000000d000000000000000, type: 0}
@@ -42,7 +42,7 @@ BoxCollider2D:
   m_Enabled: 1
   m_Density: 1
   m_Material: {fileID: 0}
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
   m_Offset: {x: 0, y: 0}

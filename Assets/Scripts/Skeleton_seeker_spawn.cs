@@ -23,7 +23,7 @@ public class Skeleton_seeker_spawn : MonoBehaviour
         }
     }
 
-    public void NullAnim(string name)
+    public void SetFalseForAnim(string name)
     {
         anim.SetBool(name, false);
     }

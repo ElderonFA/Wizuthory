@@ -1,6 +1,9 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using Random = UnityEngine.Random;
+
 //using UnityEngine.Random;
 
 public class NpcMoving : MonoBehaviour
@@ -14,6 +17,7 @@ public class NpcMoving : MonoBehaviour
     [SerializeField] private Transform playerTransform;
     [SerializeField] private Animator animator;
     [SerializeField] private SpriteRenderer personView;
+    [SerializeField] private NpcAttack npcAttack;
 
     [Header ("MinMaxDelay")]
     [SerializeField] private float minWaitTime;
@@ -34,10 +38,10 @@ public class NpcMoving : MonoBehaviour
     private float _goTime;
     //public bool Patrol => _goTime > 0;
 
-
     void FixedUpdate()
     {
         UpdateMove();
+        //Debug.Log(_chasePlayer);
     }
 
 
@@ -79,6 +83,7 @@ public class NpcMoving : MonoBehaviour
         } 
         
         personView.flipX = _goLeft;
+        npcAttack.ChangeAttackPos(_goLeft);
     }
 
     private void UpdateActualSpeed()
@@ -98,7 +103,7 @@ public class NpcMoving : MonoBehaviour
         {
             if (_takeOppositeLook)
             {
-                _goLeft = _goLeft == true ? false : true;
+                _goLeft = !_goLeft;
                 _takeOppositeLook = false;
             }
             else
@@ -133,6 +138,12 @@ public class NpcMoving : MonoBehaviour
 
             _takeOppositeLook = true;
         }
+        
+        if (other.tag == "Death")
+        {
+            npcHealth.TakeDamage(npcHealth.MaxHp);
+        }
+        
     }
 
     public void SetCanMove()

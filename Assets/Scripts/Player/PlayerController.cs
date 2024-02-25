@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -43,14 +44,20 @@ public class PlayerController : MonoBehaviour
 
     public string NameCurrentAnim => anim.GetCurrentAnimatorClipInfo(0)[0].clip.name;
 
-    void Start()
+    public static Action RestartLvl;
+
+    public void Start()
     {
         anim = GetComponent<Animator>();
         rb   = GetComponent<Rigidbody2D>();
         sr   = GetComponent<SpriteRenderer>();
+
+        SceneController.exitToMenu += DestroySelf;
+        RestartLvl += DestroySelf;
+        DontDestroyOnLoad(gameObject);
     }
-    
-    void Update()
+
+    public void Update()
     {
         if (health.IsAlive)
         {
@@ -61,10 +68,16 @@ public class PlayerController : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.R))
         {
             SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
+            RestartLvl?.Invoke();
+        }
+        
+        if (Input.GetKeyDown(KeyCode.L))
+        {
+            SceneManager.LoadScene(2);
         }
     }
 
-    void FixedUpdate()
+    public void FixedUpdate()
     {
         if (!canMove) return;
         
@@ -244,5 +257,16 @@ public class PlayerController : MonoBehaviour
     public void NullAnimation(string name)
     {
         anim.SetBool(name, false);
+    }
+
+    private void DestroySelf()
+    {
+        Destroy(gameObject);
+    }
+
+    public void OnDestroy()
+    {
+        SceneController.exitToMenu -= DestroySelf;
+        RestartLvl -= DestroySelf;
     }
 }

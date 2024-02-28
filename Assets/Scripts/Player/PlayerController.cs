@@ -70,11 +70,6 @@ public class PlayerController : MonoBehaviour
             SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
             RestartLvl?.Invoke();
         }
-        
-        if (Input.GetKeyDown(KeyCode.L))
-        {
-            SceneManager.LoadScene(2);
-        }
     }
 
     public void FixedUpdate()
@@ -85,6 +80,11 @@ public class PlayerController : MonoBehaviour
             UpdateMove();
 
         UpdateAnimation();
+    }
+
+    public void TeleportTo(Transform pos)
+    {
+        transform.position = pos.position;
     }
 
     private void CheckKey()

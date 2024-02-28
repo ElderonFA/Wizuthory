@@ -131,7 +131,7 @@ public class CutSceneController : MonoBehaviour
         clickToContinue.color = new Color(1f, 1f, 1f, 0f);
         playerController.SetCanMove(true);
         
-        yield return new WaitForSeconds(3f);
+        yield return new WaitForSeconds(1f);
         cutSceneIsEnd = true;
     }
     

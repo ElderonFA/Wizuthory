@@ -2790,7 +2790,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &339942940
 RectTransform:
   m_ObjectHideFlags: 0
@@ -12392,6 +12392,7 @@ MonoBehaviour:
   health: {fileID: 382766339}
   healthIndicator: {fileID: 1842045688}
   blackFon: {fileID: 339942941}
+  cutSceneController: {fileID: 2113357772}
 --- !u!1 &1604734838
 GameObject:
   m_ObjectHideFlags: 0
@@ -16448,7 +16449,7 @@ GameObject:
   m_Icon: {fileID: 3936346786652291628, guid: 0000000000000000d000000000000000, type: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &2113357771
 RectTransform:
   m_ObjectHideFlags: 0

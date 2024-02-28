@@ -8,6 +8,7 @@ public class HealthBarController : MonoBehaviour
     [SerializeField] private Health health;
     [SerializeField] private RectTransform healthIndicator;
     [SerializeField] private Image blackFon;
+    [SerializeField] private CutSceneController cutSceneController;
 
     public static Action startLevelEvent;
     public static Action endLevelEvent;
@@ -15,6 +16,8 @@ public class HealthBarController : MonoBehaviour
     void Start()
     {
         StartHideBlackScreen();
+        blackFon.gameObject.SetActive(true);
+        cutSceneController.gameObject.SetActive(true);
         
         startLevelEvent += StartHideBlackScreen;
         endLevelEvent += StartShowingBlackScreen;

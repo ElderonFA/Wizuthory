@@ -1,18 +1,17 @@
 using System;
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
-using UnityEngine.UI;
 
 public class SceneController : MonoBehaviour
 {
     public static Action exitToMenu;
+    public static Action<int> toNewLevel;
 
     public void Start()
     {
         DontDestroyOnLoad(gameObject);
         exitToMenu += DestroySelf;
+        toNewLevel += LoadLevel;
     }
 
     private void DestroySelf()
@@ -34,6 +33,12 @@ public class SceneController : MonoBehaviour
         SceneManager.LoadScene(1);
     }
 
+    public void LoadLevel(int levelNum)
+    {
+        SceneManager.LoadScene(levelNum);
+        HealthBarController.startLevelEvent?.Invoke();
+    }
+
     public void LoadMenu()
     {
         SceneManager.LoadScene(0);
@@ -47,5 +52,6 @@ public class SceneController : MonoBehaviour
     public void OnDestroy()
     {
         exitToMenu -= DestroySelf;
+        toNewLevel -= LoadLevel;
     }
 }

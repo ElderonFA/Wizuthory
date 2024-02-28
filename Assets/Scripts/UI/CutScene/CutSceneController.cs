@@ -1,11 +1,14 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Linq;
 using Cinemachine;
 using UnityEngine;
 using UnityEngine.EventSystems;
+using UnityEngine.SceneManagement;
 using UnityEngine.UI;
+using Debug = UnityEngine.Debug;
 
 public class CutSceneController : MonoBehaviour
 {
@@ -34,6 +37,9 @@ public class CutSceneController : MonoBehaviour
     [SerializeField] private Image rightImage;
     [Space] 
     [SerializeField] private List<PersonInCutscenes> personsConfigs;
+    
+    private bool endLevel;
+    private bool cutSceneIsEnd;
 
     [Serializable]
     public class PersonInCutscenes
@@ -58,6 +64,13 @@ public class CutSceneController : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.S))
         {
             Debug.Log("Клавиша нажата S");
+        }
+
+        if (cutSceneIsEnd && endLevel)
+        {
+            SceneController.toNewLevel?.Invoke(SceneManager.GetActiveScene().buildIndex + 1);
+            endLevel = false;
+            cutSceneIsEnd = false;
         }
     }
 
@@ -106,13 +119,20 @@ public class CutSceneController : MonoBehaviour
 
         while (!Input.GetMouseButtonDown(0))
         {
+            if (endLevel)
+            {
+                HealthBarController.endLevelEvent?.Invoke();
+            }
+            
             yield return null;
         }
         
         StartCoroutine(HideBordersAnim());
-        //StopCoroutine(StartCutScene(new CutScene(new List<string>())));
         clickToContinue.color = new Color(1f, 1f, 1f, 0f);
         playerController.SetCanMove(true);
+        
+        yield return new WaitForSeconds(3f);
+        cutSceneIsEnd = true;
     }
     
     private void ShowStep(CutSceneStep cutSceneStep, Image imagePlace)
@@ -145,6 +165,17 @@ public class CutSceneController : MonoBehaviour
         if (target)
         {
             cinemachineVirtualCamera.Follow = target;
+        }
+
+        var sceneEvent = cutSceneStep.GetEvent;
+        if (sceneEvent != CutSceneEvents.None)
+        {
+            switch (sceneEvent)
+            {
+                case CutSceneEvents.EndLevel:
+                    endLevel = true;
+                    break;
+            }
         }
     }
 

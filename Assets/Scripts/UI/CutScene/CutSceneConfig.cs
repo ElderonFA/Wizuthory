@@ -30,6 +30,9 @@ public class CutSceneStep
     
     [SerializeField] private Persons person;
     public Persons GetPerson => person;
+    
+    [SerializeField] private CutSceneEvents sceneEvent;
+    public CutSceneEvents GetEvent => sceneEvent;
 }
 
 public enum Persons
@@ -37,4 +40,11 @@ public enum Persons
     VoiceOver,
     Player,
     Skeleton,
+}
+
+public enum CutSceneEvents
+{
+    None,
+    EndLevel,
+    StartLevel,
 }

@@ -33,6 +33,11 @@ public class SceneController : MonoBehaviour
             exitToMenu?.Invoke();
             LoadMenu();
         }
+        
+        if (Input.GetKeyDown(KeyCode.L))
+        {
+            LoadLevel(2);
+        }
     }
 
     public void Play()

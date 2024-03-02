@@ -10528,7 +10528,6 @@ GameObject:
   - component: {fileID: 1292117674}
   - component: {fileID: 1292117675}
   - component: {fileID: 1292117673}
-  - component: {fileID: 1292117676}
   m_Layer: 0
   m_Name: Player
   m_TagString: Player
@@ -10707,24 +10706,6 @@ CapsuleCollider2D:
   m_Offset: {x: 0, y: 0.27}
   m_Size: {x: 0.19, y: 0.53}
   m_Direction: 0
---- !u!114 &1292117676
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1292117667}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: b8a21dde783e85a46ae0acd613f7ea8b, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  layers:
-  - {fileID: 149753391}
-  - {fileID: 1789916451}
-  coeff:
-  - 0.1
-  - 0.2
 --- !u!1 &1292498189
 GameObject:
   m_ObjectHideFlags: 0
@@ -11038,6 +11019,56 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 6652596917257294037, guid: 96827e73164cccb4bac71ef2c37fbe54, type: 3}
   m_PrefabInstance: {fileID: 2001400921}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &1343175452
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1343175454}
+  - component: {fileID: 1343175453}
+  m_Layer: 0
+  m_Name: ParalaxController
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &1343175453
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1343175452}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b8a21dde783e85a46ae0acd613f7ea8b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  layers:
+  - {fileID: 149753391}
+  - {fileID: 1789916451}
+  coeff:
+  - 0.1
+  - 0.2
+--- !u!4 &1343175454
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1343175452}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 4.525272, y: 1.3489442, z: -0.59202874}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 8
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1346643888
 GameObject:
   m_ObjectHideFlags: 0
@@ -13017,7 +13048,7 @@ GameObject:
   - component: {fileID: 1693666675}
   m_Layer: 7
   m_Name: Camera
-  m_TagString: Untagged
+  m_TagString: CMCamera
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0

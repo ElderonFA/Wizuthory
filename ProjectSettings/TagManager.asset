@@ -10,6 +10,7 @@ TagManager:
   - HitBox
   - WalkingLimit
   - CameraConfiner
+  - CMCamera
   layers:
   - Default
   - TransparentFX

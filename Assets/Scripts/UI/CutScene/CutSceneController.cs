@@ -26,9 +26,6 @@ public class CutSceneController : MonoBehaviour
 
     [Header("Delays")]
     [SerializeField] private float textShowDelay;
-    [SerializeField] private float lastTextShowDelay;
-
-    public static Action<CutScene> OnStartCutScene;
 
     [SerializeField] private Text clickToContinue;
 
@@ -38,8 +35,12 @@ public class CutSceneController : MonoBehaviour
     [Space] 
     [SerializeField] private List<PersonInCutscenes> personsConfigs;
     
+    public static Action<CutScene> OnStartCutScene;
+    
     private bool endLevel;
     private bool cutSceneIsEnd;
+
+    private bool bordersIsShow;
 
     [Serializable]
     public class PersonInCutscenes
@@ -81,14 +82,19 @@ public class CutSceneController : MonoBehaviour
 
     private IEnumerator StartCutScene(CutScene cutScene)
     {
-        StartCoroutine(ShowBordersAnim());
         playerController.SetCanMove(false);
         var startDelay = textShowDelay;
         
         var currentStepIdx = 0;
         var allStep = cutScene.GetAllStep;
-
+        
         ShowStep(allStep[currentStepIdx], leftImage);
+        
+        StartCoroutine(ShowBordersAnim());
+        while (!bordersIsShow)
+        {
+            yield return null;
+        }
 
         while (currentStepIdx < allStep.Length - 1)
         {
@@ -112,7 +118,7 @@ public class CutSceneController : MonoBehaviour
         var alph = 0f;
         while (alph < 1f)
         {
-            alph += Time.deltaTime / 2f;
+            alph += Time.deltaTime;
             clickToContinue.color = new Color(1f, 1f, 1f, alph);
             yield return null;
         }
@@ -130,8 +136,12 @@ public class CutSceneController : MonoBehaviour
         StartCoroutine(HideBordersAnim());
         clickToContinue.color = new Color(1f, 1f, 1f, 0f);
         playerController.SetCanMove(true);
+
+        while (bordersIsShow)
+        {
+            yield return null;
+        }
         
-        yield return new WaitForSeconds(1f);
         cutSceneIsEnd = true;
     }
     
@@ -193,6 +203,8 @@ public class CutSceneController : MonoBehaviour
             bottomBorder.position = new Vector2(bottomBorder.position.x, startPosBottom);
             yield return null;
         }
+
+        bordersIsShow = true;
         StopCoroutine(ShowBordersAnim());
     }
     
@@ -213,6 +225,8 @@ public class CutSceneController : MonoBehaviour
             bottomBorder.position = new Vector2(bottomBorder.position.x, startPosBottom);
             yield return null;
         }
+        
+        bordersIsShow = false;
         StopCoroutine(HideBordersAnim());
     }
 

@@ -13,7 +13,7 @@ public class CutSceneStarter : MonoBehaviour
     {
         if (other.tag == "Player")
         {
-            CutSceneController.OnStartCutScene.Invoke(cutSceneConfig.GetConfigCutScene);
+            CutSceneController.OnStartCutScene?.Invoke(cutSceneConfig.GetConfigCutScene);
             Destroy(gameObject);
         }
     }

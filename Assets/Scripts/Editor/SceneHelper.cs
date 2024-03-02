@@ -10,10 +10,12 @@ public class SceneHelper : EditorWindow
     private const string scenesPath = "Assets/Scenes/";
     private const string sceneType  = ".unity";
 
-    string myString = "Hello World";
     bool groupEnabled;
-    bool myBool = true;
-    float myFloat = 1.23f;
+    
+    //string myString = "Hello World";
+    //bool myBool = true;
+    //float myFloat = 1.23f;
+    
     // Add menu item named "My Window" to the Window menu
     [UnityEditor.MenuItem("Window/My Window")]
     public static void ShowWindow()
@@ -26,6 +28,7 @@ public class SceneHelper : EditorWindow
     {
         ButtonChangeScene("Load Menu", "Menu");
         ButtonChangeScene("Load Level 1", "Level_1");
+        ButtonChangeScene("Load Level 2", "Level_2");
         
         /*GUILayout.Label ("Base Settings", EditorStyles.boldLabel);
         myString = EditorGUILayout.TextField ("Text Field", myString);
@@ -40,6 +43,7 @@ public class SceneHelper : EditorWindow
     {
         if (GUILayout.Button(buttonName))
         {
+            EditorSceneManager.SaveCurrentModifiedScenesIfUserWantsTo();
             EditorSceneManager.OpenScene(scenesPath + sceneName + sceneType);
         }
     }

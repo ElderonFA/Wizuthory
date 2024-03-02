@@ -1,4 +1,5 @@
 using System;
+using Cinemachine;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
@@ -6,6 +7,12 @@ public class SceneController : MonoBehaviour
 {
     public static Action exitToMenu;
     public static Action<int> toNewLevel;
+
+    private GameObject camera;
+    private GameObject confObj;
+    
+    //костыль с уровнями
+    private int currentLlv = 0;
 
     public void Start()
     {
@@ -30,13 +37,27 @@ public class SceneController : MonoBehaviour
 
     public void Play()
     {
-        SceneManager.LoadScene(1);
+        LoadLevel(1);
     }
 
-    public void LoadLevel(int levelNum)
+    private void LoadLevel(int levelNum)
     {
         SceneManager.LoadScene(levelNum);
         HealthBarController.startLevelEvent?.Invoke();
+
+        currentLlv++;
+
+        if (camera == null)
+        {
+            camera = GameObject.FindWithTag("MainCamera");
+        }
+
+        if (currentLlv > 1)
+        {
+            Destroy(confObj);
+        }
+        
+        confObj = GameObject.FindWithTag("CameraConfiner");
     }
 
     public void LoadMenu()

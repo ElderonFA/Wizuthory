@@ -9,6 +9,7 @@ TagManager:
   - DamageAttack
   - HitBox
   - WalkingLimit
+  - CameraConfiner
   layers:
   - Default
   - TransparentFX

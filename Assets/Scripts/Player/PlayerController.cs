@@ -59,9 +59,12 @@ public class PlayerController : MonoBehaviour
 
     public void Update()
     {
-        if (!health.IsAlive) 
+        if (!health.IsAlive)
+        {
+            go = false;
             return;
-        
+        }
+
         CheckKey();
         UpdateAttack();
     }

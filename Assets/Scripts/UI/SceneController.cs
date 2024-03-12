@@ -13,7 +13,7 @@ public class SceneController : MonoBehaviour
     public static Action<HealthBarController> actionGetInterfaceController;
     public static Action<CameraHandler> actionGetCameraHandler;
 
-    private GameObject camera;
+    private GameObject currentCamera;
     private GameObject confObj;
 
     private HealthBarController interfaceControllerInstance;
@@ -109,9 +109,9 @@ public class SceneController : MonoBehaviour
 
         currentLlv++;
 
-        if (camera == null)
+        if (currentCamera == null)
         {
-            camera = GameObject.FindWithTag("MainCamera");
+            currentCamera = GameObject.FindWithTag("MainCamera");
         }
 
         if (currentLlv > 1)

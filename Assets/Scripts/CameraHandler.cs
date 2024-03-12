@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Security.Cryptography;
 using Cinemachine;
 using UnityEngine;
 
@@ -10,7 +11,7 @@ public class CameraHandler : MonoBehaviour
 
     public static Action<PolygonCollider2D> updateCameraConfiner;
 
-    private static bool updateConfinerIsListen;
+    private bool updateConfinerIsListen;
     
     void Awake()
     {
@@ -21,6 +22,13 @@ public class CameraHandler : MonoBehaviour
             updateConfinerIsListen = true;
             updateCameraConfiner += UpdateCameraConfiner;
         }
+
+        SceneController.exitToMenu += DestroySelf;
+    }
+
+    private void Start()
+    {
+        SceneController.actionGetCameraHandler?.Invoke(this);
     }
 
     private void UpdateCameraConfiner(PolygonCollider2D collider2d)
@@ -28,8 +36,15 @@ public class CameraHandler : MonoBehaviour
         confiner2D.m_BoundingShape2D = collider2d;
     }
 
+    private void DestroySelf()
+    {
+        Destroy(gameObject);
+    }
+
     private void OnDestroy()
     {
+        SceneController.exitToMenu -= DestroySelf;
+        
         updateCameraConfiner -= UpdateCameraConfiner;
     }
 }

@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -31,13 +32,18 @@ public class Health : MonoBehaviour
         anim.SetBool("isAlive", isAlive);
 
         personView = transform.parent.gameObject.GetComponent<SpriteRenderer>();
+    }
 
-        //onPersonDead += KillSelf;
+    public void RevivePlayer()
+    {
+        currentHp = MaxHp;
+        isAlive = true;
+        anim.SetBool("isAlive", isAlive);
     }
 
     public void TakeDamage(float damage)
     {
-        currentHp -= Mathf.Max(0, damage);
+        currentHp -= Mathf.Min(currentHp, damage);
         onPersonTakeDamage?.Invoke();
 
         CheckIsAlive();
@@ -52,7 +58,7 @@ public class Health : MonoBehaviour
 
     private void CheckIsAlive()
     {
-        isAlive = currentHp > 0 ? true : false;
+        isAlive = currentHp > 0;
     }
     
     //Корутина анимации смерти и удаления персонажа со здоровьем
@@ -73,9 +79,12 @@ public class Health : MonoBehaviour
         }
         
         StopCoroutine(DespawnAnim());
-        Destroy(transform.parent.gameObject);
+        
+        if (gameObject.tag != "Player")
+        {
+            Destroy(transform.parent.gameObject);
+        }
     }
-    
 
     public void KillSelf()
     {

@@ -62,11 +62,6 @@ public class CutSceneController : MonoBehaviour
 
     public void Update()
     {
-        if (Input.GetKeyDown(KeyCode.S))
-        {
-            Debug.Log("Клавиша нажата S");
-        }
-
         if (cutSceneIsEnd && endLevel)
         {
             SceneController.toNewLevel?.Invoke(SceneManager.GetActiveScene().buildIndex + 1);

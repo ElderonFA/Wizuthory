@@ -44,8 +44,6 @@ public class PlayerController : MonoBehaviour
 
     public string NameCurrentAnim => anim.GetCurrentAnimatorClipInfo(0)[0].clip.name;
 
-    public static Action RestartLvl;
-
     public void Start()
     {
         anim = GetComponent<Animator>();
@@ -53,38 +51,40 @@ public class PlayerController : MonoBehaviour
         sr   = GetComponent<SpriteRenderer>();
 
         SceneController.exitToMenu += DestroySelf;
-        RestartLvl += DestroySelf;
+        SceneController.restartLvl += Respawn;
+        SceneController.actionGetPlayerController?.Invoke(this);
+        
         DontDestroyOnLoad(gameObject);
     }
 
     public void Update()
     {
-        if (health.IsAlive)
-        {
-            CheckKey();
-            UpdateAttack();
-        }
-
-        if (Input.GetKeyDown(KeyCode.R))
-        {
-            SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
-            RestartLvl?.Invoke();
-        }
+        if (!health.IsAlive) 
+            return;
+        
+        CheckKey();
+        UpdateAttack();
     }
 
     public void FixedUpdate()
     {
         if (!canMove) return;
-        
-        if (health.IsAlive)
-            UpdateMove();
 
-        UpdateAnimation();
+        if (health.IsAlive)
+        {
+            UpdateMove();
+            UpdateAnimation();
+        }
     }
 
     public void TeleportTo(Transform pos)
     {
         transform.position = pos.position;
+    }
+    
+    private void Respawn()
+    {
+        health.RevivePlayer();
     }
 
     private void CheckKey()
@@ -221,6 +221,7 @@ public class PlayerController : MonoBehaviour
 
     void OnTriggerStay2D(Collider2D other)
     {
+        //теги это плохо (в этой реализации)
         if (other.tag != "Player" 
             && other.tag != "Enemy" 
             && other.tag != "DamageAttack" 
@@ -267,6 +268,6 @@ public class PlayerController : MonoBehaviour
     public void OnDestroy()
     {
         SceneController.exitToMenu -= DestroySelf;
-        RestartLvl -= DestroySelf;
+        SceneController.restartLvl -= Respawn;
     }
 }

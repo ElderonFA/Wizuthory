@@ -9,9 +9,15 @@ public class HealthBarController : MonoBehaviour
     [SerializeField] private RectTransform healthIndicator;
     [SerializeField] private Image blackFon;
     [SerializeField] private CutSceneController cutSceneController;
+    [SerializeField] private DeathPopup deathPopup;
 
     public static Action startLevelEvent;
     public static Action endLevelEvent;
+
+    private void Awake()
+    {
+        DontDestroyOnLoad(gameObject);
+    }
 
     void Start()
     {
@@ -23,11 +29,16 @@ public class HealthBarController : MonoBehaviour
         endLevelEvent += StartShowingBlackScreen;
         
         SceneController.exitToMenu += DestroySelf;
-        PlayerController.RestartLvl += DestroySelf;
+        SceneController.restartLvl += HideDeathPopup;
+        SceneController.restartLvl += UpdateBar;
+        SceneController.actionGetInterfaceController?.Invoke(this);
         
         health.onPersonTakeDamage += UpdateBar;
-        
-        DontDestroyOnLoad(gameObject);
+    }
+
+    private void HideDeathPopup()
+    {
+        deathPopup.Hide();
     }
 
     private void UpdateBar()
@@ -82,9 +93,10 @@ public class HealthBarController : MonoBehaviour
     void OnDestroy()
     {
         SceneController.exitToMenu -= DestroySelf;
-        PlayerController.RestartLvl -= DestroySelf;
+        SceneController.restartLvl -= HideDeathPopup;
+        SceneController.restartLvl -= UpdateBar;
         
-        startLevelEvent += StartHideBlackScreen;
+        startLevelEvent -= StartHideBlackScreen;
         endLevelEvent -= StartShowingBlackScreen;
         
         health.onPersonTakeDamage -= UpdateBar;

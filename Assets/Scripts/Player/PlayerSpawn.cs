@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -10,11 +11,17 @@ public class PlayerSpawn : MonoBehaviour
     {
         playerController = FindObjectOfType<PlayerController>();
         playerController.TeleportTo(transform);
+
+        SceneController.restartLvl += RespawnPlayer;
     }
 
-    // Update is called once per frame
-    void Update()
+    private void RespawnPlayer()
     {
-        
+        playerController.TeleportTo(transform);
+    }
+
+    private void OnDestroy()
+    {
+        SceneController.restartLvl -= RespawnPlayer;
     }
 }

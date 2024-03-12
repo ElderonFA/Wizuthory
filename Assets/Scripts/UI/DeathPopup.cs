@@ -13,16 +13,22 @@ public class DeathPopup : MonoBehaviour
         anim = GetComponent<Animator>();
 
         playerHealth.onPersonDead += ShowOnPlayerDeath;
+        SceneController.restartLvl += Hide;
     }
 
     private void ShowOnPlayerDeath()
     {
-        if (!anim.enabled)
-            anim.enabled = true;
+        anim.Play("showPopup");
+    }
+
+    public void Hide()
+    {
+        anim.Play("hidePopup");
     }
 
     void OnDestroy()
     {
         playerHealth.onPersonDead -= ShowOnPlayerDeath;
+        SceneController.restartLvl -= Hide;
     }
 }

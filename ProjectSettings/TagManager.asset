@@ -12,6 +12,7 @@ TagManager:
   - CameraConfiner
   - CMCamera
   - Item
+  - CutSceneObject
   layers:
   - Default
   - TransparentFX

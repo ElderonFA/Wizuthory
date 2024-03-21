@@ -47,4 +47,5 @@ public enum CutSceneEvents
     None,
     EndLevel,
     StartLevel,
+    BranchCrack,
 }

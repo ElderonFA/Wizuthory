@@ -180,6 +180,18 @@ public class CutSceneController : MonoBehaviour
                 case CutSceneEvents.EndLevel:
                     endLevel = true;
                     break;
+                
+                case CutSceneEvents.BranchCrack:
+                    var trees = FindObjectsOfType<TreeWithBranch>();
+                    foreach (var tree in trees)
+                    {
+                        if (tree.gameObject.tag == "CutSceneObject")
+                        {
+                            tree.DropBranch();
+                            break;
+                        }
+                    }
+                    break;
             }
         }
     }

@@ -20,6 +20,9 @@ public class SceneController : MonoBehaviour
     private CameraHandler cameraHandlerInstace;
     private PlayerController playerControllerInstance;
     
+    //костыль с запоминанием кол-ва зелий
+    private int countHealPotionInStartLvl;
+    
     //костыль с уровнями
     private int currentLlv = 0;
 
@@ -94,6 +97,8 @@ public class SceneController : MonoBehaviour
     private void Restart()
     {
         SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
+        playerControllerInstance.SetHealPotionCount(countHealPotionInStartLvl);
+        PlayerController.onHealPotionCountChange?.Invoke(countHealPotionInStartLvl);
         restartLvl?.Invoke();
     }
 
@@ -106,6 +111,12 @@ public class SceneController : MonoBehaviour
     {
         SceneManager.LoadScene(levelNum);
         HealthBarController.startLevelEvent?.Invoke();
+
+        if (currentLlv > 1)
+        {
+            countHealPotionInStartLvl = playerControllerInstance.GetCountHealPotion;
+            PlayerController.onHealPotionCountChange?.Invoke(countHealPotionInStartLvl);
+        }
 
         currentLlv++;
 

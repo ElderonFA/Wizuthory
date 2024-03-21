@@ -11,6 +11,9 @@ public class HealthBarController : MonoBehaviour
     [SerializeField] private CutSceneController cutSceneController;
     [SerializeField] private DeathPopup deathPopup;
 
+    [SerializeField] private GameObject healthPotionInterfaceElements;
+    [SerializeField] private Text healPotionCountText;
+
     public static Action startLevelEvent;
     public static Action endLevelEvent;
 
@@ -31,9 +34,22 @@ public class HealthBarController : MonoBehaviour
         SceneController.exitToMenu += DestroySelf;
         SceneController.restartLvl += HideDeathPopup;
         SceneController.restartLvl += UpdateBar;
+        
         SceneController.actionGetInterfaceController?.Invoke(this);
         
         health.onPersonTakeDamage += UpdateBar;
+
+        PlayerController.onHealPotionCountChange += UpdateViewCountHealPotion;
+    }
+
+    private void UpdateViewCountHealPotion(int count)
+    {
+        if (healthPotionInterfaceElements.activeSelf == false)
+        {
+            healthPotionInterfaceElements.SetActive(true);
+        }
+        
+        healPotionCountText.text = count.ToString();
     }
 
     private void HideDeathPopup()
@@ -100,5 +116,7 @@ public class HealthBarController : MonoBehaviour
         endLevelEvent -= StartShowingBlackScreen;
         
         health.onPersonTakeDamage -= UpdateBar;
+        
+        PlayerController.onHealPotionCountChange -= UpdateViewCountHealPotion;
     }
 }

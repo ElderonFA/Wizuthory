@@ -1,6 +1,9 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
+using Looting;
+using UnityEditor;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
@@ -21,12 +24,6 @@ public class PlayerController : MonoBehaviour
     private bool right = true;
     
     private bool canMove = true;
-    public void SetCanMove(bool b)
-    {
-        anim.SetBool("isRunning", false);
-        anim.SetBool("onGround", true);
-        canMove = b;
-    }
 
     private bool go;
     private bool isJump;
@@ -41,6 +38,26 @@ public class PlayerController : MonoBehaviour
     private SpriteRenderer sr;
 
     [SerializeField] private Health health;
+    
+    private int maxHealPotion = 2;
+    private int currentCountHealPotion;
+    public int GetCountHealPotion => currentCountHealPotion;
+
+    public void SetHealPotionCount(int count)
+    {
+        currentCountHealPotion = count;
+    }
+
+    public static Action<int> onHealPotionCountChange;
+    
+    private List<IItem> canTakeItems = new List<IItem>();
+    
+    public void SetCanMove(bool b)
+    {
+        anim.SetBool("isRunning", false);
+        anim.SetBool("onGround", true);
+        canMove = b;
+    }
 
     public string NameCurrentAnim => anim.GetCurrentAnimatorClipInfo(0)[0].clip.name;
 
@@ -124,7 +141,29 @@ public class PlayerController : MonoBehaviour
                 go = false;
             }
         }
+        
+        if (Input.GetKeyUp(KeyCode.E))
+        {
+            if (canTakeItems.Count > 0 && currentCountHealPotion < maxHealPotion)
+            {
+                var firstElement = canTakeItems.FirstOrDefault(x => x is HealPotion);
 
+                firstElement?.CollectItem();
+
+                currentCountHealPotion++;
+                onHealPotionCountChange?.Invoke(currentCountHealPotion);
+            }
+        }
+        
+        if (Input.GetKeyUp(KeyCode.H))
+        {
+            if (currentCountHealPotion > 0)
+            {
+                currentCountHealPotion--;
+                onHealPotionCountChange?.Invoke(currentCountHealPotion);
+                health.TakeDamage(5);
+            }
+        }
 
         //Прыжок
         if (Input.GetKeyDown(KeyCode.Space) && onGround)
@@ -187,9 +226,6 @@ public class PlayerController : MonoBehaviour
                 attack = true;
             }
         }
-
-        /*if (Input.GetMouseButtonDown(1))
-            Debug.Log("Pressed secondary button.");*/
     }
 
     private void UpdateAnimation()
@@ -220,11 +256,18 @@ public class PlayerController : MonoBehaviour
         {
             health.TakeDamage(health.MaxHp);
         }
+
+        if (other.tag == "Item")
+        {
+            var currentItem = other.GetComponent<IItem>();
+            
+            canTakeItems.Add(currentItem);
+        }
     }
 
     void OnTriggerStay2D(Collider2D other)
     {
-        //теги это плохо (в этой реализации)
+        //теги это плохо (в этой реализации (да тут вообще много плохого, сокрей бы доделать...))
         if (other.tag != "Player" 
             && other.tag != "Enemy" 
             && other.tag != "DamageAttack" 
@@ -237,6 +280,20 @@ public class PlayerController : MonoBehaviour
     {
         if (other.tag != "Player" && other.tag != "Enemy"&&  other.tag != "DamageAttack" && other.tag != "HitBox")
             onGround = false;
+
+        if (other.tag == "Item")
+        {
+            var item = other.GetComponent<IItem>();
+            
+            foreach (var itemCanTake in canTakeItems)
+            {
+                if (itemCanTake == item)
+                {
+                    canTakeItems.Remove(item);
+                    break;
+                }
+            }
+        }
     }
 
 

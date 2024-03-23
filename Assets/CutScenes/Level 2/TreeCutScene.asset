@@ -14,14 +14,14 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   currentCutScene:
     allStep:
-    - text: How beautiful the sky today
+    - text: How beautiful the sky today...
       person: 1
       sceneEvent: 0
     - text: '*creeek*'
       person: 0
       sceneEvent: 0
     - text: So beautiful...
-      person: 0
+      person: 1
       sceneEvent: 0
     - text: ...
       person: 0

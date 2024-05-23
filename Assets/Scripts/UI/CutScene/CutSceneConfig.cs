@@ -44,8 +44,9 @@ public enum Persons
 
 public enum CutSceneEvents
 {
-    None,
-    EndLevel,
-    StartLevel,
-    BranchCrack,
+    None = 0,
+    EndLevel = 1,
+    StartLevel = 2,
+    BranchCrack = 3,
+    LookAtWhole = 4,
 }

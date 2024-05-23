@@ -24,7 +24,7 @@ public class SceneController : MonoBehaviour
     private int countHealPotionInStartLvl;
     
     //костыль с уровнями
-    private int currentLlv = 0;
+    public static int currentLlv = 0;
 
     public void Start()
     {

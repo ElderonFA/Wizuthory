@@ -52,6 +52,8 @@ public class PlayerController : MonoBehaviour
     
     private List<IItem> canTakeItems = new List<IItem>();
     
+    public bool isDebug = true;
+    
     public void SetCanMove(bool b)
     {
         anim.SetBool("isRunning", false);
@@ -171,6 +173,11 @@ public class PlayerController : MonoBehaviour
             isJump = true;
             attack = false;
             dubleAttack = false;  
+        }
+        
+        if (Input.GetKeyUp(KeyCode.N) && isDebug)
+        {
+            SceneController.toNewLevel?.Invoke(SceneController.currentLlv);
         }
     }
 

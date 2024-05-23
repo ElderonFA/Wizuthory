@@ -42,6 +42,8 @@ public class CutSceneController : MonoBehaviour
 
     private bool bordersIsShow;
 
+    private bool skipCutScenes = true;
+    
     [Serializable]
     public class PersonInCutscenes
     {
@@ -72,6 +74,11 @@ public class CutSceneController : MonoBehaviour
 
     private void StartCutSceneCoroutine(CutScene cutScene)
     {
+        if (playerController.isDebug && skipCutScenes)
+        {
+            return;
+        }
+
         StartCoroutine(StartCutScene(cutScene));
     }
 
@@ -191,6 +198,11 @@ public class CutSceneController : MonoBehaviour
                             break;
                         }
                     }
+                    break;
+                
+                case CutSceneEvents.LookAtWhole:
+                    var whole = GameObject.Find("WholePos");
+                    cinemachineVirtualCamera.Follow = whole.transform;        
                     break;
             }
         }

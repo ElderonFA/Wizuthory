@@ -29,6 +29,7 @@ public class SceneHelper : EditorWindow
         ButtonChangeScene("Load Menu", "Menu");
         ButtonChangeScene("Load Level 1", "Level_1");
         ButtonChangeScene("Load Level 2", "Level_2");
+        ButtonChangeScene("Load Level 3", "Level_3");
         
         /*GUILayout.Label ("Base Settings", EditorStyles.boldLabel);
         myString = EditorGUILayout.TextField ("Text Field", myString);

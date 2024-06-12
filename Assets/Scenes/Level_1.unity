@@ -2805,7 +2805,7 @@ RectTransform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 1600207210}
-  m_RootOrder: 4
+  m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
@@ -6014,7 +6014,7 @@ RectTransform:
   - {fileID: 885702900}
   - {fileID: 1048794178}
   m_Father: {fileID: 1600207210}
-  m_RootOrder: 2
+  m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
@@ -10954,6 +10954,7 @@ MonoBehaviour:
   flySpeed: 3
   attackEffector: {fileID: 1263108639}
   health: {fileID: 382766339}
+  isDebug: 1
 --- !u!61 &1292117674
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -12224,7 +12225,7 @@ RectTransform:
   - {fileID: 1009847685}
   - {fileID: 1918948740}
   m_Father: {fileID: 1600207210}
-  m_RootOrder: 1
+  m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
@@ -12731,10 +12732,10 @@ RectTransform:
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 1844526569}
-  - {fileID: 1513497537}
   - {fileID: 698060308}
   - {fileID: 2113357771}
   - {fileID: 339942940}
+  - {fileID: 1513497537}
   m_Father: {fileID: 0}
   m_RootOrder: 10
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -16834,7 +16835,7 @@ RectTransform:
   - {fileID: 1346643889}
   - {fileID: 831232189}
   m_Father: {fileID: 1600207210}
-  m_RootOrder: 3
+  m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}

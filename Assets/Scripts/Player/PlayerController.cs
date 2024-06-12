@@ -28,6 +28,9 @@ public class PlayerController : MonoBehaviour
     private bool go;
     private bool isJump;
 
+    private bool onLadder;
+    private Ladder currentLadder;
+
     private bool attack;
     private bool dubleAttack;
 
@@ -155,6 +158,11 @@ public class PlayerController : MonoBehaviour
                 currentCountHealPotion++;
                 onHealPotionCountChange?.Invoke(currentCountHealPotion);
             }
+
+            if (currentLadder != null)
+            {
+                currentLadder.UseLadder(transform);
+            }
         }
         
         if (Input.GetKeyUp(KeyCode.H))
@@ -270,6 +278,11 @@ public class PlayerController : MonoBehaviour
             
             canTakeItems.Add(currentItem);
         }
+        
+        if (other.TryGetComponent<Ladder>(out var ladder))
+        {
+            currentLadder = ladder;
+        }
     }
 
     void OnTriggerStay2D(Collider2D other)
@@ -300,6 +313,11 @@ public class PlayerController : MonoBehaviour
                     break;
                 }
             }
+        }
+        
+        if (other.TryGetComponent<Ladder>(out var ladder))
+        {
+            currentLadder = null;
         }
     }
 

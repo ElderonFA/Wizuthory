@@ -25,8 +25,8 @@ TagManager:
   - Player
   - NotColidePlayer
   - Items
-  - ItemCollider
-  - HealthBoxes
+  - ItemsBoxes
+  - 
   - 
   - 
   - 

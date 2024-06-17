@@ -14,6 +14,9 @@ public class PlayerController : MonoBehaviour
     [SerializeField] private float flySpeed;
 
     [SerializeField] private AreaEffector2D attackEffector;
+    
+    [SerializeField] private Health health;
+    [SerializeField] private DistanceAttack distanceAttack;
 
     private float actualSpeed;
     public float ActualSpeed => actualSpeed;
@@ -40,11 +43,16 @@ public class PlayerController : MonoBehaviour
     private Rigidbody2D rb;
     private SpriteRenderer sr;
 
-    [SerializeField] private Health health;
-    
     private int maxHealPotion = 2;
     private int currentCountHealPotion;
     public int GetCountHealPotion => currentCountHealPotion;
+
+    private List<PlayerSkills> availableSkills = new List<PlayerSkills>();
+
+    public void AddNewSkill(PlayerSkills newSkill)
+    {
+        availableSkills.Add(newSkill);
+    }
 
     public void SetHealPotionCount(int count)
     {
@@ -151,12 +159,24 @@ public class PlayerController : MonoBehaviour
         {
             if (canTakeItems.Count > 0 && currentCountHealPotion < maxHealPotion)
             {
-                var firstElement = canTakeItems.FirstOrDefault(x => x is HealPotion);
+                var firstElement = canTakeItems.FirstOrDefault();
+                if (firstElement == null)
+                {
+                    return;
+                }
+                
+                firstElement.CollectItem();
 
-                firstElement?.CollectItem();
+                if (firstElement is HealPotion)
+                {
+                    currentCountHealPotion++;
+                    onHealPotionCountChange?.Invoke(currentCountHealPotion);
+                }
 
-                currentCountHealPotion++;
-                onHealPotionCountChange?.Invoke(currentCountHealPotion);
+                if (firstElement is UpScroll)
+                {
+                    //Здесь может быть эффект или звук
+                }
             }
 
             if (currentLadder != null)
@@ -186,6 +206,12 @@ public class PlayerController : MonoBehaviour
         if (Input.GetKeyUp(KeyCode.N) && isDebug)
         {
             SceneController.toNewLevel?.Invoke(SceneController.currentLlv);
+        }
+        
+        //Дистанционная атака
+        if (availableSkills.Contains(PlayerSkills.DistanceAttack) && Input.GetMouseButtonDown(1))
+        {
+            distanceAttack.DoAttack(Camera.main.ScreenToWorldPoint(Input.mousePosition));
         }
     }
 

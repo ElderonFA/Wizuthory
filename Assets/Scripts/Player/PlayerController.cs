@@ -49,9 +49,26 @@ public class PlayerController : MonoBehaviour
 
     private List<PlayerSkills> availableSkills = new List<PlayerSkills>();
 
+    public bool canShoot;
+    public bool canDodge;
+
     public void AddNewSkill(PlayerSkills newSkill)
     {
+        SceneController.actionUnlockUiSkill(newSkill);
+        
         availableSkills.Add(newSkill);
+
+        switch (newSkill)
+        {
+            case PlayerSkills.Dodge:
+                canDodge = true;
+                break;
+            case PlayerSkills.DistanceAttack:
+                canShoot = true;
+                break;
+            default:
+                break;
+        }
     }
 
     public void SetHealPotionCount(int count)
@@ -85,8 +102,6 @@ public class PlayerController : MonoBehaviour
         SceneController.actionGetPlayerController?.Invoke(this);
         
         DontDestroyOnLoad(gameObject);
-        
-        AddNewSkill(PlayerSkills.DistanceAttack);
 
         health.onPersonDead += PlayDeadAnim;
     }
@@ -207,17 +222,35 @@ public class PlayerController : MonoBehaviour
             attack = false;
             dubleAttack = false;  
         }
-        
-        if (Input.GetKeyUp(KeyCode.N) && isDebug)
+
+        if (isDebug)
         {
-            SceneController.toNewLevel?.Invoke(SceneController.currentLlv);
+            if (Input.GetKeyUp(KeyCode.N))
+            {
+                SceneController.toNewLevel?.Invoke(SceneController.currentLlv);
+            }
+
+            if (Input.GetKeyUp(KeyCode.U))
+            {
+                AddNewSkill(PlayerSkills.DistanceAttack);
+            }
         }
-        
+
         //Дистанционная атака
-        if (availableSkills.Contains(PlayerSkills.DistanceAttack) && Input.GetMouseButtonDown(1))
+        if (availableSkills.Contains(PlayerSkills.DistanceAttack) 
+            && Input.GetMouseButtonDown(1)
+            && canShoot)
         {
+            SceneController.actionUseUiSkill(PlayerSkills.DistanceAttack);
+            
             distanceAttack.DoAttack(Camera.main.ScreenToWorldPoint(Input.mousePosition));
+            canShoot = false;
         }
+    }
+
+    public void SetCanShootTrue()
+    {
+        canShoot = true;
     }
 
     private void UpdateMove()

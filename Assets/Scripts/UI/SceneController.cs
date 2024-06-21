@@ -1,5 +1,6 @@
 using System;
 using Cinemachine;
+using Looting;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
@@ -9,16 +10,21 @@ public class SceneController : MonoBehaviour
     public static Action restartLvl;
     public static Action<int> toNewLevel;
     
-    public static Action<PlayerController> actionGetPlayerController;
-    public static Action<HealthBarController> actionGetInterfaceController;
-    public static Action<CameraHandler> actionGetCameraHandler;
-
     private GameObject currentCamera;
     private GameObject confObj;
 
     private HealthBarController interfaceControllerInstance;
     private CameraHandler cameraHandlerInstace;
-    private PlayerController playerControllerInstance;
+    public static PlayerController playerControllerInstance;
+    private UiSkillsController uiSkillsControllerInstance;
+    
+    public static Action<PlayerController> actionGetPlayerController;
+    public static Action<HealthBarController> actionGetInterfaceController;
+    public static Action<CameraHandler> actionGetCameraHandler;
+    
+    public static Action<UiSkillsController> actionGetUiSkillsController;
+    public static Action<PlayerSkills> actionUnlockUiSkill;
+    public static Action<PlayerSkills> actionUseUiSkill;
     
     //костыль с запоминанием кол-ва зелий
     private int countHealPotionInStartLvl;
@@ -35,6 +41,21 @@ public class SceneController : MonoBehaviour
         actionGetPlayerController += GetPlayerController;
         actionGetInterfaceController += GetInterfaceController;
         actionGetCameraHandler += GetCameraHandler;
+        actionGetUiSkillsController += GetUiSkillsController;
+    }
+
+    private void GetUiSkillsController(UiSkillsController uiSC)
+    {
+        if (uiSkillsControllerInstance != null)
+        {
+            Destroy(uiSC.gameObject);
+            return;
+        }
+
+        uiSkillsControllerInstance = uiSC;
+        
+        actionUnlockUiSkill += uiSkillsControllerInstance.UnlockUiSkill;
+        actionUseUiSkill += uiSkillsControllerInstance.UseUiSkill;
     }
 
     private void GetPlayerController(PlayerController pc)

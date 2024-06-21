@@ -151,6 +151,11 @@ public class NpcMoving : MonoBehaviour
         _canMove = true;
     }
 
+    public void SetPlayerTransform(Transform transform)
+    {
+        playerTransform = transform;
+    }
+
     void OnTriggerExit2D(Collider2D other)
     {
         if (other.tag != "Player")

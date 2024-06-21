@@ -10,16 +10,12 @@ public class Skeleton_seeker_spawn : MonoBehaviour
     [SerializeField] private NpcMoving npcMoving;
     [SerializeField] private Health selfHealth;
 
-    public void Update()
-    {
-        //Debug.Log(selfHealth.IsAlive);
-    }
-
     void OnTriggerEnter2D(Collider2D other)
     {
         if (other.tag == "Player" && anim.enabled == false && selfHealth.IsAlive)
         {
             anim.enabled = true;
+            npcMoving.SetPlayerTransform(other.transform);
         }
     }
 

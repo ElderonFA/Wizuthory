@@ -66,6 +66,11 @@ namespace EntityComponent
         {
             StopCoroutine(movingCoroutine);
             StartCoroutine(DestroySelf());
+
+            if (other.tag == "HitBox")
+            {
+                other.GetComponent<Health>().TakeDamage(damage);
+            }
         }
     }
 }

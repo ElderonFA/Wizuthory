@@ -2151,7 +2151,8 @@ GameObject:
   m_Component:
   - component: {fileID: 355457429}
   - component: {fileID: 355457428}
-  m_Layer: 0
+  - component: {fileID: 355457430}
+  m_Layer: 14
   m_Name: Flor3
   m_TagString: Untagged
   m_Icon: {fileID: 7250588514170254948, guid: 0000000000000000d000000000000000, type: 0}
@@ -2199,6 +2200,27 @@ Transform:
   m_Father: {fileID: 1238383815}
   m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!50 &355457430
+Rigidbody2D:
+  serializedVersion: 4
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 355457427}
+  m_BodyType: 1
+  m_Simulated: 1
+  m_UseFullKinematicContacts: 0
+  m_UseAutoMass: 0
+  m_Mass: 1
+  m_LinearDrag: 0
+  m_AngularDrag: 0.05
+  m_GravityScale: 1
+  m_Material: {fileID: 0}
+  m_Interpolate: 0
+  m_SleepingMode: 1
+  m_CollisionDetection: 0
+  m_Constraints: 0
 --- !u!1001 &378724677
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -7686,7 +7708,8 @@ GameObject:
   m_Component:
   - component: {fileID: 1364211671}
   - component: {fileID: 1364211670}
-  m_Layer: 0
+  - component: {fileID: 1364211672}
+  m_Layer: 14
   m_Name: Flor1
   m_TagString: Untagged
   m_Icon: {fileID: 7250588514170254948, guid: 0000000000000000d000000000000000, type: 0}
@@ -7734,6 +7757,27 @@ Transform:
   m_Father: {fileID: 1238383815}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!50 &1364211672
+Rigidbody2D:
+  serializedVersion: 4
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1364211669}
+  m_BodyType: 1
+  m_Simulated: 1
+  m_UseFullKinematicContacts: 0
+  m_UseAutoMass: 0
+  m_Mass: 1
+  m_LinearDrag: 0
+  m_AngularDrag: 0.05
+  m_GravityScale: 1
+  m_Material: {fileID: 0}
+  m_Interpolate: 0
+  m_SleepingMode: 1
+  m_CollisionDetection: 0
+  m_Constraints: 0
 --- !u!1 &1391872667
 GameObject:
   m_ObjectHideFlags: 0
@@ -8723,7 +8767,8 @@ GameObject:
   m_Component:
   - component: {fileID: 1681541760}
   - component: {fileID: 1681541759}
-  m_Layer: 0
+  - component: {fileID: 1681541761}
+  m_Layer: 14
   m_Name: Flor2
   m_TagString: Untagged
   m_Icon: {fileID: 7250588514170254948, guid: 0000000000000000d000000000000000, type: 0}
@@ -8771,6 +8816,27 @@ Transform:
   m_Father: {fileID: 1238383815}
   m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!50 &1681541761
+Rigidbody2D:
+  serializedVersion: 4
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1681541758}
+  m_BodyType: 1
+  m_Simulated: 1
+  m_UseFullKinematicContacts: 0
+  m_UseAutoMass: 0
+  m_Mass: 1
+  m_LinearDrag: 0
+  m_AngularDrag: 0.05
+  m_GravityScale: 1
+  m_Material: {fileID: 0}
+  m_Interpolate: 0
+  m_SleepingMode: 1
+  m_CollisionDetection: 0
+  m_Constraints: 0
 --- !u!1 &1739761699
 GameObject:
   m_ObjectHideFlags: 0
@@ -10637,7 +10703,8 @@ GameObject:
   m_Component:
   - component: {fileID: 2003845646}
   - component: {fileID: 2003845645}
-  m_Layer: 0
+  - component: {fileID: 2003845647}
+  m_Layer: 14
   m_Name: GroundColider
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -10720,6 +10787,27 @@ Transform:
   m_Father: {fileID: 89149728}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!50 &2003845647
+Rigidbody2D:
+  serializedVersion: 4
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2003845644}
+  m_BodyType: 1
+  m_Simulated: 1
+  m_UseFullKinematicContacts: 0
+  m_UseAutoMass: 0
+  m_Mass: 1
+  m_LinearDrag: 0
+  m_AngularDrag: 0.05
+  m_GravityScale: 1
+  m_Material: {fileID: 0}
+  m_Interpolate: 0
+  m_SleepingMode: 1
+  m_CollisionDetection: 0
+  m_Constraints: 0
 --- !u!1 &2037442227
 GameObject:
   m_ObjectHideFlags: 0

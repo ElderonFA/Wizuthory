@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -9,10 +10,14 @@ public class ImagesAnim : MonoBehaviour
     [SerializeField] private List<Sprite> sprites;
     [SerializeField] private float frameDelay;
 
+    public Action endEvent;
+
     private int allFramesCount;
     private int currentFrame = -1;
 
     private SpriteRenderer spriteRenderer;
+
+    private Coroutine currentCoroutine;
 
     private void Start()
     {
@@ -20,7 +25,7 @@ public class ImagesAnim : MonoBehaviour
 
         spriteRenderer = GetComponent<SpriteRenderer>();
         
-        StartCoroutine(TimeSprite());
+        currentCoroutine = StartCoroutine(TimeSprite());
     }
 
     /// <summary>
@@ -40,5 +45,22 @@ public class ImagesAnim : MonoBehaviour
 
             yield return new WaitForSeconds(frameDelay);
         }
+    }
+
+    public IEnumerator PlayOneShot(List<Sprite> listSpritesAnim)
+    {
+        StopCoroutine(currentCoroutine);
+        currentCoroutine = null;
+        currentFrame = 0;
+        
+        while (currentFrame <= listSpritesAnim.Count - 1)
+        {
+            spriteRenderer.sprite = listSpritesAnim[currentFrame];
+            currentFrame++;
+            
+            yield return new WaitForSeconds(frameDelay);
+        }
+        
+        endEvent?.Invoke();
     }
 }

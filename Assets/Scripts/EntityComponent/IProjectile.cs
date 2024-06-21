@@ -9,6 +9,6 @@ namespace EntityComponent
         
         IEnumerator Moving(Vector2 target);
         
-        void DestroySelf();
+        IEnumerator DestroySelf();
     }
 }

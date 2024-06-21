@@ -26,9 +26,9 @@ TagManager:
   - NotColidePlayer
   - Items
   - ItemsBoxes
-  - 
-  - 
-  - 
+  - PlayerProjectiles
+  - Enemies
+  - ProjectilesColliding
   - 
   - 
   - 

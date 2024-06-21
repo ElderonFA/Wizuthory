@@ -85,6 +85,8 @@ public class PlayerController : MonoBehaviour
         SceneController.actionGetPlayerController?.Invoke(this);
         
         DontDestroyOnLoad(gameObject);
+        
+        AddNewSkill(PlayerSkills.DistanceAttack);
     }
 
     public void Update()

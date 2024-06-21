@@ -95,7 +95,8 @@ GameObject:
   - component: {fileID: 5871740627363068653}
   - component: {fileID: 1380433674816262572}
   - component: {fileID: 3659173358049954159}
-  m_Layer: 0
+  - component: {fileID: 308242318765373038}
+  m_Layer: 12
   m_Name: PlayerProjectile
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -160,7 +161,7 @@ SpriteRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_Sprite: {fileID: -1289684512, guid: 089473062d28a834f9d98a24c6a4f860, type: 3}
-  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_Color: {r: 0.6671542, g: 0.08962262, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
@@ -202,4 +203,32 @@ MonoBehaviour:
   speed: 2
   lifeTime: 1
   lightMask: {fileID: 1549590804337375555}
-  renderer: {fileID: 5871740627363068653}
+  imgAnim: {fileID: 308242318765373038}
+  despawnAnim:
+  - {fileID: 1093885250, guid: 831a58b820ce80246b8f9d2503afbbb6, type: 3}
+  - {fileID: 1852636274, guid: 831a58b820ce80246b8f9d2503afbbb6, type: 3}
+  - {fileID: -225129885, guid: 831a58b820ce80246b8f9d2503afbbb6, type: 3}
+  - {fileID: -887751644, guid: 831a58b820ce80246b8f9d2503afbbb6, type: 3}
+  - {fileID: 583142935, guid: 831a58b820ce80246b8f9d2503afbbb6, type: 3}
+  - {fileID: 1823595763, guid: 831a58b820ce80246b8f9d2503afbbb6, type: 3}
+  - {fileID: -1633796524, guid: 831a58b820ce80246b8f9d2503afbbb6, type: 3}
+--- !u!114 &308242318765373038
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 9050201176419405561}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5ca4f9a014494ac458043fde600a5790, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  sprites:
+  - {fileID: -1289684512, guid: 089473062d28a834f9d98a24c6a4f860, type: 3}
+  - {fileID: -1931364377, guid: 089473062d28a834f9d98a24c6a4f860, type: 3}
+  - {fileID: 1346639947, guid: 089473062d28a834f9d98a24c6a4f860, type: 3}
+  - {fileID: 706150117, guid: 089473062d28a834f9d98a24c6a4f860, type: 3}
+  - {fileID: 434439589, guid: 089473062d28a834f9d98a24c6a4f860, type: 3}
+  - {fileID: -661415717, guid: 089473062d28a834f9d98a24c6a4f860, type: 3}
+  frameDelay: 0.075

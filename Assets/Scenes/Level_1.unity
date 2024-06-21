@@ -3259,7 +3259,7 @@ GameObject:
   - component: {fileID: 382766340}
   - component: {fileID: 382766339}
   - component: {fileID: 382766341}
-  m_Layer: 12
+  m_Layer: 8
   m_Name: Health
   m_TagString: HitBox
   m_Icon: {fileID: 0}
@@ -4886,7 +4886,7 @@ GameObject:
   m_Component:
   - component: {fileID: 557785242}
   - component: {fileID: 557785243}
-  m_Layer: 12
+  m_Layer: 8
   m_Name: BodyCollider
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -8137,9 +8137,7 @@ PrefabInstance:
       propertyPath: m_Name
       value: Water camitary (2)
       objectReference: {fileID: 0}
-    m_RemovedComponents:
-    - {fileID: 7691590917295368359, guid: 019b36d09cd44f7469a280e47cd92942, type: 3}
-    - {fileID: 7691590917295368355, guid: 019b36d09cd44f7469a280e47cd92942, type: 3}
+    m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 019b36d09cd44f7469a280e47cd92942, type: 3}
 --- !u!1001 &1036500274
 PrefabInstance:

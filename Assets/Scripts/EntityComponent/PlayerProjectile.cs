@@ -1,5 +1,6 @@
 using System;
 using System.Collections;
+using System.Collections.Generic;
 using UnityEngine;
 
 namespace EntityComponent
@@ -12,13 +13,17 @@ namespace EntityComponent
         [SerializeField] private float lifeTime;
         [Space] 
         [SerializeField] private SpriteMask lightMask;
-        [SerializeField] private SpriteRenderer renderer;
+        [SerializeField] private ImagesAnim imgAnim;
+        [Space] 
+        [SerializeField] private List<Sprite> despawnAnim;
+
+        private Coroutine movingCoroutine;
 
         public void Spawn(Quaternion rotation, Vector2 target)
         {
             gameObject.SetActive(true);
             transform.rotation = rotation;
-            StartCoroutine(Moving(target));
+            movingCoroutine = StartCoroutine(Moving(target));
         }
 
         public IEnumerator Moving(Vector2 target)
@@ -34,22 +39,33 @@ namespace EntityComponent
                 yield return null;
             }
 
-            var currentAlphaCutoff = lightMask.alphaCutoff;
-            while (lightMask.alphaCutoff < 1)
-            {
-                transform.Translate(Vector2.right * speed * Time.deltaTime);
-                currentAlphaCutoff += Time.deltaTime * 2f;
-                lightMask.alphaCutoff = currentAlphaCutoff;
-                
-                yield return null;
-            }
-            
-            DestroySelf();
+            StartCoroutine(DestroySelf());
         }
 
-        public void DestroySelf()
+        public IEnumerator DestroySelf()
         {
+            StartCoroutine(imgAnim.PlayOneShot(despawnAnim));
+                
+            var currentAlphaCutoff = lightMask.alphaCutoff;
+
+            if (currentAlphaCutoff <= 1f)
+            {
+                while (lightMask.alphaCutoff < 1f)
+                {
+                    currentAlphaCutoff += Time.deltaTime * 2f;
+                    lightMask.alphaCutoff = currentAlphaCutoff;
+
+                    yield return null;
+                }
+            }
+
             Destroy(gameObject);
+        }
+
+        private void OnTriggerEnter2D(Collider2D other)
+        {
+            StopCoroutine(movingCoroutine);
+            StartCoroutine(DestroySelf());
         }
     }
 }

@@ -87,6 +87,8 @@ public class PlayerController : MonoBehaviour
         DontDestroyOnLoad(gameObject);
         
         AddNewSkill(PlayerSkills.DistanceAttack);
+
+        health.onPersonDead += PlayDeadAnim;
     }
 
     public void Update()
@@ -119,6 +121,7 @@ public class PlayerController : MonoBehaviour
     
     private void Respawn()
     {
+        anim.enabled = true;
         health.RevivePlayer();
     }
 
@@ -371,6 +374,11 @@ public class PlayerController : MonoBehaviour
     public void NullAnimation(string name)
     {
         anim.SetBool(name, false);
+    }
+
+    public void PlayDeadAnim()
+    {
+        anim.SetBool("playDead", true);
     }
 
     private void DestroySelf()

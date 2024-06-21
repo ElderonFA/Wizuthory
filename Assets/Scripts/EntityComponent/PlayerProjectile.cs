@@ -64,7 +64,11 @@ namespace EntityComponent
 
         private void OnTriggerEnter2D(Collider2D other)
         {
-            StopCoroutine(movingCoroutine);
+            if (movingCoroutine != null)
+            {
+                StopCoroutine(movingCoroutine);
+            }
+            
             StartCoroutine(DestroySelf());
 
             if (other.tag == "HitBox")

@@ -49,8 +49,12 @@ public class ImagesAnim : MonoBehaviour
 
     public IEnumerator PlayOneShot(List<Sprite> listSpritesAnim)
     {
-        StopCoroutine(currentCoroutine);
-        currentCoroutine = null;
+        if (currentCoroutine != null)
+        {
+            StopCoroutine(currentCoroutine);
+            currentCoroutine = null;
+        }
+        
         currentFrame = 0;
         
         while (currentFrame <= listSpritesAnim.Count - 1)

@@ -40,6 +40,11 @@ public class Skeleton_seeker_spawn : MonoBehaviour
         selfHealth.KillSelf();
     }
 
+    public void StartWorkHealth()
+    {
+        selfHealth.SetIsImmortal(false);
+    }
+
     public void SetCanMoveTrue()
     {
         npcMoving.SetCanMove();

@@ -477,6 +477,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   maxHp: 200
   anim: {fileID: 8368765646578020875}
+  isImmortal: 1
 --- !u!212 &8368765647696506872
 SpriteRenderer:
   m_ObjectHideFlags: 0

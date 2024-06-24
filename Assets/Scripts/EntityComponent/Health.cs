@@ -24,6 +24,9 @@ public class Health : MonoBehaviour
 
     public delegate void OnPersonDead();
     public event OnPersonDead onPersonDead;
+
+    [SerializeField] private bool isImmortal;
+    public void SetIsImmortal(bool val) => isImmortal = val;
     
     void Awake()
     {
@@ -43,6 +46,11 @@ public class Health : MonoBehaviour
 
     public void TakeDamage(float damage)
     {
+        if (isImmortal)
+        {
+            return;
+        }
+        
         currentHp -= Mathf.Min(currentHp, damage);
         onPersonTakeDamage?.Invoke();
 

@@ -26,6 +26,7 @@ public class UiSkillsController : MonoBehaviour
         switch (skillType)
         {
             case PlayerSkills.Dodge:
+                skill.OnSkillRefresh += SceneController.playerControllerInstance.SetCanDodgeTrue;
                 currentControlForHelp = "Shift";
                 break;
             case PlayerSkills.DistanceAttack:
@@ -33,7 +34,7 @@ public class UiSkillsController : MonoBehaviour
                  currentControlForHelp = "Right Mouse Button";
                 break;
             default:
-                throw new ArgumentOutOfRangeException(nameof(skillType), skillType, null);
+                break;
         }
 
         StartCoroutine(ShowSkill(skill.gameObject));

@@ -7,8 +7,10 @@ using UnityEngine.U2D;
 [RequireComponent(typeof(SpriteRenderer))]
 public class ImagesAnim : MonoBehaviour
 {
-    [SerializeField] private List<Sprite> sprites;
+    [SerializeField] public List<Sprite> sprites;
     [SerializeField] private float frameDelay;
+    [Space] 
+    [SerializeField] private bool isOneShot;
 
     public Action endEvent;
 
@@ -24,8 +26,11 @@ public class ImagesAnim : MonoBehaviour
         allFramesCount = sprites.Count;
 
         spriteRenderer = GetComponent<SpriteRenderer>();
-        
-        currentCoroutine = StartCoroutine(TimeSprite());
+
+        if (!isOneShot)
+        {
+            currentCoroutine = StartCoroutine(TimeSprite());
+        }
     }
 
     /// <summary>

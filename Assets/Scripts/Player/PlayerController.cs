@@ -16,9 +16,12 @@ public class PlayerController : MonoBehaviour
     [SerializeField] private AreaEffector2D attackEffector;
     
     [SerializeField] private Health health;
+    
     [SerializeField] private DistanceAttack distanceAttack;
     private float rightPosDistanceAttack;
     private float leftPosDistanceAttack;
+
+    [SerializeField] private ImagesAnim dodgeAnim;
 
     private float actualSpeed;
     public float ActualSpeed => actualSpeed;
@@ -109,6 +112,8 @@ public class PlayerController : MonoBehaviour
 
         rightPosDistanceAttack = distanceAttack.transform.localPosition.x;
         leftPosDistanceAttack = -rightPosDistanceAttack;
+
+        dodgeAnim.endEvent += OffImmortal;
     }
 
     public void Update()
@@ -241,8 +246,21 @@ public class PlayerController : MonoBehaviour
 
             if (Input.GetKeyUp(KeyCode.U))
             {
-                AddNewSkill(PlayerSkills.DistanceAttack);
+                AddNewSkill(PlayerSkills.Dodge);
             }
+        }
+        
+        //Уворот
+        if ((availableSkills.Contains(PlayerSkills.Dodge)
+             && Input.GetKeyDown(KeyCode.LeftShift)
+             && canDodge))
+        {
+            SceneController.actionUseUiSkill(PlayerSkills.Dodge);
+            
+            health.SetIsImmortal(true);
+            DodgeProcess();
+
+            canDodge = false;
         }
 
         //Дистанционная атака
@@ -255,6 +273,23 @@ public class PlayerController : MonoBehaviour
             distanceAttack.DoAttack(Camera.main.ScreenToWorldPoint(Input.mousePosition));
             canShoot = false;
         }
+    }
+
+    private void DodgeProcess()
+    {
+        sr.color = new Color(sr.color.r, sr.color.g, sr.color.b, 0.5f);
+        StartCoroutine(dodgeAnim.PlayOneShot(dodgeAnim.sprites));
+    }
+
+    private void OffImmortal()
+    {
+        sr.color = new Color(sr.color.r, sr.color.g, sr.color.b, 1f);
+        health.SetIsImmortal(false);
+    }
+    
+    public void SetCanDodgeTrue()
+    {
+        canDodge = true;
     }
 
     public void SetCanShootTrue()

@@ -18,7 +18,6 @@ public class UiSkillsController : MonoBehaviour
     public void UnlockUiSkill(PlayerSkills skillType)
     {
         var skill = skillsList.FirstOrDefault(x => x.currentSkillType == skillType);
-        skill.gameObject.SetActive(true);
 
         switch (skillType)
         {
@@ -29,6 +28,23 @@ public class UiSkillsController : MonoBehaviour
                 break;
             default:
                 throw new ArgumentOutOfRangeException(nameof(skillType), skillType, null);
+        }
+
+        StartCoroutine(ShowSkill(skill.gameObject));
+    }
+
+    private IEnumerator ShowSkill(GameObject uiSkillObject)
+    {
+        uiSkillObject.transform.localScale =  Vector3.zero;
+        
+        uiSkillObject.gameObject.SetActive(true);
+
+        var newValueScale = 0f;
+        while (newValueScale < 1f)
+        {
+            newValueScale += Time.deltaTime;
+            uiSkillObject.transform.localScale = new Vector3(newValueScale, newValueScale, 1f);
+            yield return null;
         }
     }
 

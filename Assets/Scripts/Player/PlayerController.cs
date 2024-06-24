@@ -17,6 +17,8 @@ public class PlayerController : MonoBehaviour
     
     [SerializeField] private Health health;
     [SerializeField] private DistanceAttack distanceAttack;
+    private float rightPosDistanceAttack;
+    private float leftPosDistanceAttack;
 
     private float actualSpeed;
     public float ActualSpeed => actualSpeed;
@@ -104,6 +106,9 @@ public class PlayerController : MonoBehaviour
         DontDestroyOnLoad(gameObject);
 
         health.onPersonDead += PlayDeadAnim;
+
+        rightPosDistanceAttack = distanceAttack.transform.localPosition.x;
+        leftPosDistanceAttack = -rightPosDistanceAttack;
     }
 
     public void Update()
@@ -149,6 +154,8 @@ public class PlayerController : MonoBehaviour
             right = false;
 
             go = true;
+
+            distanceAttack.transform.localPosition = new Vector3(leftPosDistanceAttack, distanceAttack.transform.localPosition.y, 1);
         }
 
         if (Input.GetKeyDown(KeyCode.D))
@@ -157,6 +164,8 @@ public class PlayerController : MonoBehaviour
             left = false;
 
             go = true;
+            
+            distanceAttack.transform.localPosition = new Vector3(rightPosDistanceAttack, distanceAttack.transform.localPosition.y, 1);
         }
 
         if (Input.GetKeyUp(KeyCode.A))

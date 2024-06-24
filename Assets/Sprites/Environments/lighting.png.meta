@@ -1,5 +1,5 @@
 fileFormatVersion: 2
-guid: ca36b1341a61daa41874690979bf62e1
+guid: 7ad90417c2f9b424cab94ae7699b906e
 TextureImporter:
   internalIDToNameTable: []
   externalObjects: {}
@@ -42,7 +42,7 @@ TextureImporter:
   nPOTScale: 0
   lightmap: 0
   compressionQuality: 50
-  spriteMode: 2
+  spriteMode: 1
   spriteExtrude: 1
   spriteMeshType: 1
   alignment: 0
@@ -114,91 +114,7 @@ TextureImporter:
     forceMaximumCompressionQuality_BC6H_BC7: 0
   spriteSheet:
     serializedVersion: 2
-    sprites:
-    - serializedVersion: 2
-      name: burning_start_1_0
-      rect:
-        serializedVersion: 2
-        x: 9
-        y: 0
-        width: 6
-        height: 4
-      alignment: 7
-      pivot: {x: 0.5, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: d84b0124961e062459edea5e8e79df74
-      internalID: -1562023367
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: burning_start_1_1
-      rect:
-        serializedVersion: 2
-        x: 32
-        y: 0
-        width: 9
-        height: 11
-      alignment: 7
-      pivot: {x: 0.5, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: 78796c1812def7f459d5c817706c0cf7
-      internalID: 1524751356
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: burning_start_1_2
-      rect:
-        serializedVersion: 2
-        x: 54
-        y: 0
-        width: 12
-        height: 15
-      alignment: 7
-      pivot: {x: 0.5, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: 1117ce35ead73d243836cea77e0e702c
-      internalID: -1664661597
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: burning_start_1_3
-      rect:
-        serializedVersion: 2
-        x: 79
-        y: 0
-        width: 12
-        height: 19
-      alignment: 7
-      pivot: {x: 0.5, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: 3d93968c7c6b0d24e9d6841a5bdaa2a1
-      internalID: 789549411
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
+    sprites: []
     outline: []
     physicsShape: []
     bones: []
@@ -209,11 +125,7 @@ TextureImporter:
     edges: []
     weights: []
     secondaryTextures: []
-    nameFileIdTable:
-      burning_start_1_1: 1524751356
-      burning_start_1_2: -1664661597
-      burning_start_1_0: -1562023367
-      burning_start_1_3: 789549411
+    nameFileIdTable: {}
   spritePackingTag: 
   pSDRemoveMatte: 0
   pSDShowRemoveMatteOption: 0

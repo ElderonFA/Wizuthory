@@ -2850,7 +2850,7 @@ RectTransform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 1600207210}
-  m_RootOrder: 3
+  m_RootOrder: 5
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
@@ -6160,7 +6160,7 @@ RectTransform:
   - {fileID: 885702900}
   - {fileID: 1048794178}
   m_Father: {fileID: 1600207210}
-  m_RootOrder: 1
+  m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
@@ -7567,7 +7567,7 @@ RectTransform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 1600207210}
-  m_RootOrder: 6
+  m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
@@ -12794,7 +12794,7 @@ RectTransform:
   - {fileID: 1009847685}
   - {fileID: 1918948740}
   m_Father: {fileID: 1600207210}
-  m_RootOrder: 4
+  m_RootOrder: 6
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
@@ -13301,12 +13301,12 @@ RectTransform:
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 1844526569}
+  - {fileID: 1627860977}
+  - {fileID: 916490492}
   - {fileID: 698060308}
   - {fileID: 2113357771}
   - {fileID: 339942940}
   - {fileID: 1513497537}
-  - {fileID: 1627860977}
-  - {fileID: 916490492}
   m_Father: {fileID: 0}
   m_RootOrder: 10
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -13451,7 +13451,7 @@ RectTransform:
   - {fileID: 543356991}
   - {fileID: 1335884875}
   m_Father: {fileID: 1600207210}
-  m_RootOrder: 5
+  m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
@@ -17746,7 +17746,7 @@ RectTransform:
   - {fileID: 1346643889}
   - {fileID: 831232189}
   m_Father: {fileID: 1600207210}
-  m_RootOrder: 2
+  m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
@@ -17784,6 +17784,9 @@ MonoBehaviour:
   - personType: 2
     personIcon: {fileID: -1719783265, guid: deed4ca157ac89f4998e7b52a5168e4b, type: 3}
     personPosition: {fileID: 1770927563}
+  - personType: 3
+    personIcon: {fileID: 192576354, guid: 031b865dcef20f744815047f095fb2f9, type: 3}
+    personPosition: {fileID: 0}
 --- !u!1 &2140468948
 GameObject:
   m_ObjectHideFlags: 0

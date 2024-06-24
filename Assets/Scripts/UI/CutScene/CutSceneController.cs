@@ -42,7 +42,7 @@ public class CutSceneController : MonoBehaviour
 
     private bool bordersIsShow;
 
-    private bool skipCutScenes = true;
+    private bool skipCutScenes = false;
     
     [Serializable]
     public class PersonInCutscenes
@@ -203,6 +203,20 @@ public class CutSceneController : MonoBehaviour
                 case CutSceneEvents.LookAtWhole:
                     var whole = GameObject.Find("WholePos");
                     cinemachineVirtualCamera.Follow = whole.transform;        
+                    break;
+                
+                case CutSceneEvents.StartFiringSpot:
+                    var finalCutSceneHelperObj = GameObject.Find("FinalCutSceneHelper");
+                    var finalCutSceneHelper = finalCutSceneHelperObj.GetComponent<FinalCutSceneHelper>();
+
+                    finalCutSceneHelper.StartFiringSpot();
+                    break;
+                
+                case CutSceneEvents.WakeUpBoss:
+                    var bossObj = GameObject.Find("Boss");
+                    var bossController = bossObj.GetComponent<BossController>();
+
+                    bossController.WakeUp();
                     break;
             }
         }

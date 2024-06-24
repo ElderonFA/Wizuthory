@@ -40,6 +40,7 @@ public enum Persons
     VoiceOver,
     Player,
     Skeleton,
+    Boss,
 }
 
 public enum CutSceneEvents
@@ -49,4 +50,6 @@ public enum CutSceneEvents
     StartLevel = 2,
     BranchCrack = 3,
     LookAtWhole = 4,
+    StartFiringSpot = 5,
+    WakeUpBoss = 6,
 }

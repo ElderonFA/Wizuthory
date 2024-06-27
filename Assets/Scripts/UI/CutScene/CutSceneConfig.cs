@@ -52,4 +52,5 @@ public enum CutSceneEvents
     LookAtWhole = 4,
     StartFiringSpot = 5,
     WakeUpBoss = 6,
+    StartUpdateBoss = 7
 }

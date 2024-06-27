@@ -43,6 +43,8 @@ public class CutSceneController : MonoBehaviour
     private bool bordersIsShow;
 
     private bool skipCutScenes = false;
+
+    private BossController bossController;
     
     [Serializable]
     public class PersonInCutscenes
@@ -182,6 +184,13 @@ public class CutSceneController : MonoBehaviour
         var sceneEvent = cutSceneStep.GetEvent;
         if (sceneEvent != CutSceneEvents.None)
         {
+            if (sceneEvent == CutSceneEvents.WakeUpBoss
+            || sceneEvent == CutSceneEvents.StartUpdateBoss)
+            {
+                var bossObj = GameObject.Find("Boss");
+                bossController = bossObj.GetComponent<BossController>();
+            }
+            
             switch (sceneEvent)
             {
                 case CutSceneEvents.EndLevel:
@@ -213,10 +222,11 @@ public class CutSceneController : MonoBehaviour
                     break;
                 
                 case CutSceneEvents.WakeUpBoss:
-                    var bossObj = GameObject.Find("Boss");
-                    var bossController = bossObj.GetComponent<BossController>();
-
                     bossController.WakeUp();
+                    break;
+                
+                case CutSceneEvents.StartUpdateBoss:
+                    bossController.StartUpdateBoss();
                     break;
             }
         }

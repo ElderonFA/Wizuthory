@@ -42,7 +42,7 @@ public class CutSceneController : MonoBehaviour
 
     private bool bordersIsShow;
 
-    private bool skipCutScenes = false;
+    private bool skipCutScenes = true;
 
     private BossController bossController;
     

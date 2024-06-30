@@ -16,6 +16,10 @@ public class BossController : MonoBehaviour
     [SerializeField] private float speed;
     [Space]
     [SerializeField] private SpriteMask eyeLight;
+    [Space] 
+    [SerializeField] private List<BossSkillObj> bossSkillObjs;
+
+    private Action castAllSkills;
 
     private BossStates currentState = BossStates.Stay;
     private Coroutine currentTimer;
@@ -42,10 +46,21 @@ public class BossController : MonoBehaviour
     private float stayTime = 1f;
     private float goTime = 1.5f;
     private float attackDelay = 2f;
+    private float castDelay = 2f;
 
     private float movingModifier = 2f;
 
+    private int counterForCastSkill;
+
     private Action<BossStates> endStateTimer;
+
+    private void Start()
+    {
+        if (SceneController.playerControllerInstance.isDebug)
+        {
+            WakeUp();
+        }
+    }
 
     private void FixedUpdate()
     {
@@ -78,11 +93,17 @@ public class BossController : MonoBehaviour
 
         attackController.playerEnterToAttack += StartAttacking;
         attackController.playerExitAttack += StopAttacking;
+
+        foreach (var bossSkillObj in bossSkillObjs)
+        {
+            castAllSkills += bossSkillObj.CastSkill;
+        }
     }
 
     private void UpdateState(BossStates newState)
     {
         currentState = newState;
+        counterForCastSkill++;
 
         if (currentTimer != null)
         {
@@ -93,6 +114,15 @@ public class BossController : MonoBehaviour
         attackController.ChangeAttackPos(!lookLeft);
 
         sr.flipX = !lookLeft;
+
+        if (counterForCastSkill == 10)
+        {
+            counterForCastSkill = 0;
+            
+            UpdateState(BossStates.CastAllSkills);
+            
+            return;
+        }
         
         switch (newState)
         {
@@ -121,7 +151,9 @@ public class BossController : MonoBehaviour
                 currentTimer = StartCoroutine(StateTimer(attackDelay, BossStates.Stay));
                 break;
                 
-            case BossStates.CastSkill:
+            case BossStates.CastAllSkills:
+                anim.SetBool("IsCastSkill", true);
+                currentTimer = StartCoroutine(StateTimer(castDelay, BossStates.Stay));
                 break;
             default:
                 break;
@@ -174,9 +206,20 @@ public class BossController : MonoBehaviour
         UpdateState(BossStates.Stay);
     }
 
+    //Функции для анимации
     public void SetIsAttackAnimFalse()
     {
         anim.SetBool("IsAttack", false);
+    }
+    
+    public void SetIsUseSkillAnimFalse()
+    {
+        anim.SetBool("IsCastSkill", false);
+    }
+
+    public void InvokeCastAllSkills()
+    {
+        castAllSkills?.Invoke();
     }
 }
 
@@ -185,5 +228,5 @@ public enum BossStates
     Stay = 0,
     Go = 1,
     Attack = 2,
-    CastSkill = 3,
+    CastAllSkills = 3,
 }

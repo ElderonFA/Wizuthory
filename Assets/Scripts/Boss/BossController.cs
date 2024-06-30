@@ -12,6 +12,7 @@ public class BossController : MonoBehaviour
     private SpriteRenderer sr;
 
     [SerializeField] private NpcAttack attackController;
+    [SerializeField] private Health healthController;
     [Space]
     [SerializeField] private float speed;
     [Space]
@@ -87,9 +88,12 @@ public class BossController : MonoBehaviour
         
         playerTransform = FindObjectOfType<PlayerController>().gameObject.transform;
         
+        SceneController.actionShowBossHealthBar?.Invoke(healthController, "ХУЙ С ГОРЫ");
+        
         StartCoroutine(ShowEyeLight());
 
         endStateTimer += UpdateState;
+        healthController.onPersonDead += Dead;
 
         attackController.playerEnterToAttack += StartAttacking;
         attackController.playerExitAttack += StopAttacking;
@@ -155,6 +159,13 @@ public class BossController : MonoBehaviour
                 anim.SetBool("IsCastSkill", true);
                 currentTimer = StartCoroutine(StateTimer(castDelay, BossStates.Stay));
                 break;
+            
+            case BossStates.Dead:
+                healthController.onPersonDead -= Dead;
+                SceneController.actionStartShowBloodOnBossName?.Invoke();
+                anim.SetBool("playDead", true);
+                break;
+            
             default:
                 break;
         }
@@ -205,6 +216,11 @@ public class BossController : MonoBehaviour
         isAttack = false;
         UpdateState(BossStates.Stay);
     }
+    
+    private void Dead()
+    {
+        UpdateState(BossStates.Dead);
+    }
 
     //Функции для анимации
     public void SetIsAttackAnimFalse()
@@ -216,10 +232,25 @@ public class BossController : MonoBehaviour
     {
         anim.SetBool("IsCastSkill", false);
     }
+    
+    public void SetPlayDeadFalse()
+    {
+        anim.SetBool("playDead", false);
+    }
+
+    public void SetIsTakeHitFalse()
+    {
+        anim.SetBool("isTakeHit", false);
+    }
 
     public void InvokeCastAllSkills()
     {
         castAllSkills?.Invoke();
+    }
+
+    public void DestroySelf()
+    {
+        Destroy(gameObject);
     }
 }
 
@@ -229,4 +260,5 @@ public enum BossStates
     Go = 1,
     Attack = 2,
     CastAllSkills = 3,
+    Dead = 4,
 }

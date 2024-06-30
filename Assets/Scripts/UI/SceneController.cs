@@ -26,6 +26,9 @@ public class SceneController : MonoBehaviour
     public static Action<PlayerSkills> actionUnlockUiSkill;
     public static Action<PlayerSkills> actionUseUiSkill;
     
+    public static Action<Health, string> actionShowBossHealthBar;
+    public static Action actionStartShowBloodOnBossName;
+    
     //костыль с запоминанием кол-ва зелий
     private int countHealPotionInStartLvl;
     
@@ -42,6 +45,9 @@ public class SceneController : MonoBehaviour
         actionGetInterfaceController += GetInterfaceController;
         actionGetCameraHandler += GetCameraHandler;
         actionGetUiSkillsController += GetUiSkillsController;
+
+        actionShowBossHealthBar += ShowHealthBossUI;
+        actionStartShowBloodOnBossName += HideHealthBossUI;
     }
 
     private void GetUiSkillsController(UiSkillsController uiSC)
@@ -162,6 +168,16 @@ public class SceneController : MonoBehaviour
     public void Exit()
     {
         Application.Quit();
+    }
+
+    public void ShowHealthBossUI(Health bossHealth, string bossName)
+    {
+        interfaceControllerInstance.SetBossHealth(bossHealth, "Unknow wizard");
+    }
+    
+    private void HideHealthBossUI()
+    {
+        interfaceControllerInstance.ShowBloodOnBossName();
     }
 
     public void OnDestroy()

@@ -11,23 +11,41 @@ public class BossController : MonoBehaviour
     private Rigidbody2D rb;
     private SpriteRenderer sr;
 
+    [SerializeField] private NpcAttack attackController;
+    [Space]
     [SerializeField] private float speed;
     [Space]
     [SerializeField] private SpriteMask eyeLight;
 
     private BossStates currentState = BossStates.Stay;
+    private Coroutine currentTimer;
     
     private Transform playerTransform;
 
     private bool IsWakeuped;
+    
     private bool go;
+    private bool goChanger
+    {
+        get => go;
+        set
+        {
+            go = value;
+
+            anim.SetBool("IsMoving", value);
+        }
+    }
+    
+    private bool lookLeft;
+    private bool isAttack;
 
     private float stayTime = 1f;
     private float goTime = 1.5f;
+    private float attackDelay = 2f;
 
     private float movingModifier = 2f;
 
-    private Action<BossStates> endTimer;
+    private Action<BossStates> endStateTimer;
 
     private void FixedUpdate()
     {
@@ -36,18 +54,10 @@ public class BossController : MonoBehaviour
             return;
         }
 
-        if (go)
+        if (goChanger)
         {
-            if (playerTransform.position.x > transform.position.x)
-            {
-                sr.flipX = false;
-                rb.AddForce(transform.right * speed * movingModifier);
-            }
-            else
-            {
-                sr.flipX = true;
-                rb.AddForce(-transform.right * speed * movingModifier);
-            }
+            var currentSpeed = lookLeft ? transform.right * speed * movingModifier : -transform.right * speed * movingModifier;
+            rb.AddForce(currentSpeed);
         }
     }
 
@@ -64,25 +74,53 @@ public class BossController : MonoBehaviour
         
         StartCoroutine(ShowEyeLight());
 
-        endTimer += UpdateState;
+        endStateTimer += UpdateState;
+
+        attackController.playerEnterToAttack += StartAttacking;
+        attackController.playerExitAttack += StopAttacking;
     }
 
     private void UpdateState(BossStates newState)
     {
         currentState = newState;
+
+        if (currentTimer != null)
+        {
+            StopCoroutine(currentTimer);
+        }
+
+        lookLeft = playerTransform.position.x > transform.position.x;
+        attackController.ChangeAttackPos(!lookLeft);
+
+        sr.flipX = !lookLeft;
         
         switch (newState)
         {
             case BossStates.Stay:
-                go = false;
-                StartCoroutine(StateTimer(stayTime, BossStates.Go));
-                anim.SetBool("isMoving", false);
+
+                if (isAttack)
+                {
+                    goChanger = false;
+                    anim.SetBool("IsAttack", true);
+                    currentTimer = StartCoroutine(StateTimer(attackDelay, BossStates.Attack));
+                }
+                else
+                {
+                    goChanger = false;
+                    currentTimer = StartCoroutine(StateTimer(stayTime, BossStates.Go));
+                }
                 break;
+            
             case BossStates.Go:
-                go = true;
-                StartCoroutine(StateTimer(goTime, BossStates.Stay));
-                anim.SetBool("isMoving", true);
+                goChanger = true;
+                currentTimer = StartCoroutine(StateTimer(goTime, BossStates.Stay));
                 break;
+            
+            case BossStates.Attack:
+                anim.SetBool("IsAttack", true);
+                currentTimer = StartCoroutine(StateTimer(attackDelay, BossStates.Stay));
+                break;
+                
             case BossStates.CastSkill:
                 break;
             default:
@@ -114,12 +152,31 @@ public class BossController : MonoBehaviour
             yield return null;
         }
         
-        endTimer?.Invoke(nextBossState);
+        endStateTimer?.Invoke(nextBossState);
     }
 
     public void StartUpdateBoss()
     {
         UpdateState(BossStates.Stay);
+    }
+    
+    private void StartAttacking()
+    {
+        goChanger = false;
+        isAttack = true;
+        
+        UpdateState(BossStates.Attack);
+    }
+
+    private void StopAttacking()
+    {
+        isAttack = false;
+        UpdateState(BossStates.Stay);
+    }
+
+    public void SetIsAttackAnimFalse()
+    {
+        anim.SetBool("IsAttack", false);
     }
 }
 
@@ -127,5 +184,6 @@ public enum BossStates
 {
     Stay = 0,
     Go = 1,
-    CastSkill = 2,
+    Attack = 2,
+    CastSkill = 3,
 }

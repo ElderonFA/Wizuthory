@@ -13,6 +13,9 @@ public class NpcAttack : MonoBehaviour
     
     [SerializeField] private AreaEffector2D areaEffector;
 
+    public Action playerEnterToAttack;
+    public Action playerExitAttack;
+
     public void ChangeAttackPos(bool left)
     {
         if (left)
@@ -28,11 +31,21 @@ public class NpcAttack : MonoBehaviour
         
     }
 
-    public void OnTriggerStay2D(Collider2D other)
+    public void OnTriggerEnter2D(Collider2D other)
     {
         if (other.tag == "Player")
         {
             anim.SetBool("IsAttack", true);
+            playerEnterToAttack?.Invoke();
+        }
+    }
+    
+    public void OnTriggerExit2D(Collider2D other)
+    {
+        if (other.tag == "Player")
+        {
+            anim.SetBool("IsAttack", false);
+            playerExitAttack?.Invoke();
         }
     }
 

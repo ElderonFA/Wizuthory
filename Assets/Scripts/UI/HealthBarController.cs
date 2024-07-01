@@ -44,6 +44,7 @@ public class HealthBarController : MonoBehaviour
         SceneController.actionGetInterfaceController?.Invoke(this);
         
         playerHealth.onPersonTakeDamage += UpdatePlayerHealthBar;
+        playerHealth.onPersonHealing += UpdatePlayerHealthBar;
 
         PlayerController.onHealPotionCountChange += UpdateViewCountHealPotion;
     }
@@ -181,6 +182,7 @@ public class HealthBarController : MonoBehaviour
         endLevelEvent -= StartShowingBlackScreen;
         
         playerHealth.onPersonTakeDamage -= UpdatePlayerHealthBar;
+        playerHealth.onPersonHealing -= UpdatePlayerHealthBar;
 
         if (bossHealth)
         {

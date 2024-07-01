@@ -233,11 +233,16 @@ public class PlayerController : MonoBehaviour
         
         if (Input.GetKeyUp(KeyCode.H))
         {
+            if (health.isHaveMaxHp)
+            {
+                return;;
+            }
+            
             if (currentCountHealPotion > 0)
             {
                 currentCountHealPotion--;
                 onHealPotionCountChange?.Invoke(currentCountHealPotion);
-                health.TakeDamage(5);
+                health.Heal(30);
             }
         }
 

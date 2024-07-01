@@ -8,6 +8,7 @@ public class Health : MonoBehaviour
 {
     [SerializeField] private float maxHp;
     public float MaxHp => maxHp;
+    public bool isHaveMaxHp => currentHp == maxHp;
 
     private float currentHp;
     public float CurrentHp => currentHp;
@@ -21,6 +22,9 @@ public class Health : MonoBehaviour
 
     public delegate void OnPersonTakeDamage();
     public event OnPersonTakeDamage onPersonTakeDamage;
+
+    public delegate void OnPersonHealing();
+    public event OnPersonHealing onPersonHealing;
 
     public delegate void OnPersonDead();
     public event OnPersonDead onPersonDead;
@@ -62,6 +66,13 @@ public class Health : MonoBehaviour
             anim.SetBool("isTakeHit", true);
         else
             onPersonDead?.Invoke();
+    }
+
+    public void Heal(float healCount)
+    {
+        var hpAfterHeal = currentHp + healCount;
+        currentHp = hpAfterHeal < maxHp ? hpAfterHeal : maxHp;
+        onPersonHealing?.Invoke();
     }
 
     private void CheckIsAlive()

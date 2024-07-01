@@ -29,10 +29,17 @@ public class UiSkillsController : MonoBehaviour
                 skill.OnSkillRefresh += SceneController.playerControllerInstance.SetCanDodgeTrue;
                 currentControlForHelp = "Shift";
                 break;
+            
             case PlayerSkills.DistanceAttack:
                  skill.OnSkillRefresh += SceneController.playerControllerInstance.SetCanShootTrue;
-                 currentControlForHelp = "Right Mouse Button";
+                 currentControlForHelp = "Right mouse";
                 break;
+            
+            case PlayerSkills.RedSparks:
+                skill.OnSkillRefresh += SceneController.playerControllerInstance.SetCanRedSparksTrue;
+                currentControlForHelp = "F";
+                break;
+            
             default:
                 break;
         }

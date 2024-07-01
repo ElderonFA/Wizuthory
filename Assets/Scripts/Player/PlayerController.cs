@@ -6,6 +6,7 @@ using Looting;
 using UnityEditor;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using Random = UnityEngine.Random;
 
 public class PlayerController : MonoBehaviour
 {
@@ -22,7 +23,10 @@ public class PlayerController : MonoBehaviour
     private float leftPosDistanceAttack;
 
     [SerializeField] private ImagesAnim dodgeAnim;
-
+    [Space] 
+    [SerializeField] private GameObject redSparksSpot;
+    [SerializeField] private GameObject redSpark;
+    
     private float actualSpeed;
     public float ActualSpeed => actualSpeed;
 
@@ -56,6 +60,7 @@ public class PlayerController : MonoBehaviour
 
     public bool canShoot;
     public bool canDodge;
+    public bool canRedSparks;
 
     public void AddNewSkill(PlayerSkills newSkill)
     {
@@ -70,6 +75,9 @@ public class PlayerController : MonoBehaviour
                 break;
             case PlayerSkills.DistanceAttack:
                 canShoot = true;
+                break;
+            case PlayerSkills.RedSparks:
+                canRedSparks = true;
                 break;
             default:
                 break;
@@ -246,7 +254,7 @@ public class PlayerController : MonoBehaviour
 
             if (Input.GetKeyUp(KeyCode.U))
             {
-                AddNewSkill(PlayerSkills.Dodge);
+                AddNewSkill(PlayerSkills.RedSparks);
             }
         }
         
@@ -273,6 +281,23 @@ public class PlayerController : MonoBehaviour
             distanceAttack.DoAttack(Camera.main.ScreenToWorldPoint(Input.mousePosition));
             canShoot = false;
         }
+        
+        //Сноп красных искр
+        if (availableSkills.Contains(PlayerSkills.RedSparks) 
+            && Input.GetKeyDown(KeyCode.F)
+            && canRedSparks)
+        {
+            SceneController.actionUseUiSkill(PlayerSkills.RedSparks);
+
+            var sparkCount = Random.Range(5, 10);
+
+            for (var i = 0; i < sparkCount; i++)
+            {
+                Instantiate(redSpark, redSparksSpot.transform.position, Quaternion.identity);
+            }
+            
+            canRedSparks = false;
+        }
     }
 
     private void DodgeProcess()
@@ -295,6 +320,11 @@ public class PlayerController : MonoBehaviour
     public void SetCanShootTrue()
     {
         canShoot = true;
+    }
+
+    public void SetCanRedSparksTrue()
+    {
+        canRedSparks = true;
     }
 
     private void UpdateMove()
@@ -326,9 +356,8 @@ public class PlayerController : MonoBehaviour
             }
         }
 
-        if (isJump)
+        if (onGround && isJump)
         {
-            isJump = false;
             rb.AddForce(transform.up * jumpPower);
         }                    
     } 
@@ -391,17 +420,31 @@ public class PlayerController : MonoBehaviour
         {
             currentLadder = ladder;
         }
+
+        if (other.tag == "SecretObject")
+        {
+            var currentSecretObject = other.GetComponent<SecretObject>();
+            
+            if (currentSecretObject.currentSecretType == SecretType.JumpingSecret && onGround == false && isJump)
+            {
+                 currentSecretObject.neededActionIsDo?.Invoke();
+            }
+        }
     }
 
     void OnTriggerStay2D(Collider2D other)
     {
         //теги это плохо (в этой реализации (да тут вообще много плохого, сокрей бы доделать...))
-        if (other.tag != "Player" 
-            && other.tag != "Enemy" 
-            && other.tag != "DamageAttack" 
-            && other.tag != "HitBox"
-            && other.tag != "WalkingLimit")
+        if (other.tag != "Player"
+        &&  other.tag != "Enemy"
+        &&  other.tag != "DamageAttack"
+        &&  other.tag != "HitBox"
+        &&  other.tag != "WalkingLimit"
+        &&  other.tag != "SecretObject")
+        {
+            isJump = false;
             onGround = true;
+        }
     }
 
     void OnTriggerExit2D(Collider2D other)

@@ -20,7 +20,6 @@ namespace Looting
         public void CollectItem()
         {
             UpPlayerSkill();
-            Destroy(mainObj);
         }
 
         public void UseItem()
@@ -42,6 +41,8 @@ namespace Looting
             {
                 player.AddNewSkill(currentSkill);
             }
+            
+            Destroy(mainObj);
         }
     }
 
@@ -49,5 +50,6 @@ namespace Looting
     {
         Dodge = 0,
         DistanceAttack = 1,
+        RedSparks = 2,
     }
 }

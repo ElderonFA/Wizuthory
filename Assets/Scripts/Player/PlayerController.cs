@@ -19,8 +19,6 @@ public class PlayerController : MonoBehaviour
     [SerializeField] private Health health;
     
     [SerializeField] private DistanceAttack distanceAttack;
-    private float rightPosDistanceAttack;
-    private float leftPosDistanceAttack;
 
     [SerializeField] private ImagesAnim dodgeAnim;
     [Space] 
@@ -57,6 +55,9 @@ public class PlayerController : MonoBehaviour
     public int GetCountHealPotion => currentCountHealPotion;
 
     private List<PlayerSkills> availableSkills = new List<PlayerSkills>();
+    
+    private float rightPosStaff;
+    private float leftPosStaff;
 
     public bool canShoot;
     public bool canDodge;
@@ -118,8 +119,8 @@ public class PlayerController : MonoBehaviour
 
         health.onPersonDead += PlayDeadAnim;
 
-        rightPosDistanceAttack = distanceAttack.transform.localPosition.x;
-        leftPosDistanceAttack = -rightPosDistanceAttack;
+        rightPosStaff = distanceAttack.transform.localPosition.x;
+        leftPosStaff = -rightPosStaff;
 
         dodgeAnim.endEvent += OffImmortal;
     }
@@ -168,7 +169,9 @@ public class PlayerController : MonoBehaviour
 
             go = true;
 
-            distanceAttack.transform.localPosition = new Vector3(leftPosDistanceAttack, distanceAttack.transform.localPosition.y, 1);
+            
+            distanceAttack.transform.localPosition = new Vector3(leftPosStaff, distanceAttack.transform.localPosition.y, 1);
+            redSparksSpot.transform.localPosition = new Vector3(leftPosStaff, redSparksSpot.transform.localPosition.y, 1);
         }
 
         if (Input.GetKeyDown(KeyCode.D))
@@ -178,7 +181,8 @@ public class PlayerController : MonoBehaviour
 
             go = true;
             
-            distanceAttack.transform.localPosition = new Vector3(rightPosDistanceAttack, distanceAttack.transform.localPosition.y, 1);
+            distanceAttack.transform.localPosition = new Vector3(rightPosStaff, distanceAttack.transform.localPosition.y, 1);
+            redSparksSpot.transform.localPosition = new Vector3(rightPosStaff, redSparksSpot.transform.localPosition.y, 1);
         }
 
         if (Input.GetKeyUp(KeyCode.A))

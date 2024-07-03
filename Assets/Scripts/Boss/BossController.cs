@@ -59,7 +59,7 @@ public class BossController : MonoBehaviour
     {
         if (SceneController.playerControllerInstance.isDebug)
         {
-            WakeUp();
+            //WakeUp();
         }
     }
 
@@ -246,6 +246,12 @@ public class BossController : MonoBehaviour
     public void InvokeCastAllSkills()
     {
         castAllSkills?.Invoke();
+    }
+
+    public void InvokeEndGameCutScene()
+    {
+        var cutSceneController = FindObjectOfType(typeof(CutSceneController)) as CutSceneController;
+        cutSceneController.onEndGame?.Invoke();
     }
 
     public void DestroySelf()

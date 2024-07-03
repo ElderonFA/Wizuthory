@@ -1,0 +1,43 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 626550de4254de44582f7522208901e0, type: 3}
+  m_Name: EndGameCutScene
+  m_EditorClassIdentifier: 
+  currentCutScene:
+    allStep:
+    - text: It was hard
+      person: 1
+      sceneEvent: 0
+    - text: Rest in peace, strange creature
+      person: 1
+      sceneEvent: 0
+    - text: Oh, i'am feeling bad...
+      person: 1
+      sceneEvent: 0
+    - text: Eyelids get heavy...
+      person: 1
+      sceneEvent: 0
+    - text: '!wQabqNe#11u#p#'
+      person: 0
+      sceneEvent: 8
+    - text: ...
+      person: 0
+      sceneEvent: 1
+    - text: What hapen with me?
+      person: 1
+      sceneEvent: 0
+    - text: I'am again on this Cemetery??
+      person: 1
+      sceneEvent: 0
+    - text: Whaaat???
+      person: 1
+      sceneEvent: 9

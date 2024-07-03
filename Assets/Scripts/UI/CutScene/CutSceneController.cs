@@ -34,17 +34,24 @@ public class CutSceneController : MonoBehaviour
     [SerializeField] private Image rightImage;
     [Space] 
     [SerializeField] private List<PersonInCutscenes> personsConfigs;
+
+    [SerializeField] 
+    private CutSceneConfig finalCutScene;
     
     public static Action<CutScene> OnStartCutScene;
     
     private bool endLevel;
+    private bool blackFonWasShow;
+    private bool waitForBlackScreen;
     private bool cutSceneIsEnd;
 
     private bool bordersIsShow;
 
-    private bool skipCutScenes = true;
+    private bool skipCutScenes = false;
 
     private BossController bossController;
+
+    public Action onEndGame;
     
     [Serializable]
     public class PersonInCutscenes
@@ -62,16 +69,13 @@ public class CutSceneController : MonoBehaviour
     private void Initialize()
     {
         OnStartCutScene += StartCutSceneCoroutine;
+        HealthBarController.onBlackFonShowed += SetBlackFonWasShowTrue;
+        onEndGame += StartFinalCutScene;
     }
 
-    public void Update()
+    private void SetBlackFonWasShowTrue()
     {
-        if (cutSceneIsEnd && endLevel)
-        {
-            SceneController.toNewLevel?.Invoke(SceneManager.GetActiveScene().buildIndex + 1);
-            endLevel = false;
-            cutSceneIsEnd = false;
-        }
+        blackFonWasShow = true;
     }
 
     private void StartCutSceneCoroutine(CutScene cutScene)
@@ -86,6 +90,7 @@ public class CutSceneController : MonoBehaviour
 
     private IEnumerator StartCutScene(CutScene cutScene)
     {
+        cutSceneIsEnd = false;
         playerController.SetCanMove(false);
         var startDelay = textShowDelay;
         
@@ -108,11 +113,23 @@ public class CutSceneController : MonoBehaviour
             }
             else
             {
+                if (waitForBlackScreen)
+                {
+                    waitForBlackScreen = blackFonWasShow;
+                    yield return null;
+                }
+                
                 if (Input.GetMouseButtonDown(0))
                 {
                     currentStepIdx++;
                     ShowStep(allStep[currentStepIdx], leftImage);
                     textShowDelay = startDelay;
+                    
+                    if (endLevel)
+                    {
+                        SceneController.toNewLevel?.Invoke(SceneManager.GetActiveScene().buildIndex + 1);
+                        endLevel = false;
+                    }
                 }
             }
             
@@ -129,7 +146,7 @@ public class CutSceneController : MonoBehaviour
 
         while (!Input.GetMouseButtonDown(0))
         {
-            if (endLevel)
+            if (endLevel && blackFonWasShow)
             {
                 HealthBarController.endLevelEvent?.Invoke();
             }
@@ -147,6 +164,8 @@ public class CutSceneController : MonoBehaviour
         }
         
         cutSceneIsEnd = true;
+        blackFonWasShow = false;
+        waitForBlackScreen = false;
     }
     
     private void ShowStep(CutSceneStep cutSceneStep, Image imagePlace)
@@ -228,6 +247,15 @@ public class CutSceneController : MonoBehaviour
                 case CutSceneEvents.StartUpdateBoss:
                     bossController.StartUpdateBoss();
                     break;
+                
+                case CutSceneEvents.WaitForBlackScreen:
+                    HealthBarController.showBlackFon?.Invoke();
+                    waitForBlackScreen = true;
+                    break;
+                
+                case CutSceneEvents.EndGame:
+                    SceneController.onGameEnd?.Invoke();
+                    break;;
             }
         }
     }
@@ -272,9 +300,15 @@ public class CutSceneController : MonoBehaviour
         bordersIsShow = false;
         StopCoroutine(HideBordersAnim());
     }
+    
+    private void StartFinalCutScene()
+    {
+        StartCutSceneCoroutine(finalCutScene.GetConfigCutScene);
+    }
 
     public void OnDestroy()
     {
         OnStartCutScene -= StartCutSceneCoroutine;
+        onEndGame -= StartFinalCutScene;
     }
 }

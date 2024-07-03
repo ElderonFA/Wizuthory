@@ -28,6 +28,8 @@ public class SceneController : MonoBehaviour
     
     public static Action<Health, string> actionShowBossHealthBar;
     public static Action actionStartShowBloodOnBossName;
+
+    public static Action onGameEnd;
     
     //костыль с запоминанием кол-ва зелий
     private int countHealPotionInStartLvl;
@@ -38,7 +40,7 @@ public class SceneController : MonoBehaviour
     public void Start()
     {
         DontDestroyOnLoad(gameObject);
-        exitToMenu += DestroySelf;
+        exitToMenu += LoadMenu;
         toNewLevel += LoadLevel;
 
         actionGetPlayerController += GetPlayerController;
@@ -84,6 +86,7 @@ public class SceneController : MonoBehaviour
         }
         
         interfaceControllerInstance = ic;
+        onGameEnd += interfaceControllerInstance.ShowEndGamePopup;
     }
     
     private void GetCameraHandler(CameraHandler ch)
@@ -107,7 +110,6 @@ public class SceneController : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.Escape))
         {
             exitToMenu?.Invoke();
-            LoadMenu();
         }
         
         if (Input.GetKeyDown(KeyCode.R))
@@ -163,6 +165,7 @@ public class SceneController : MonoBehaviour
     public void LoadMenu()
     {
         SceneManager.LoadScene(0);
+        DestroySelf();
     }
 
     public void Exit()

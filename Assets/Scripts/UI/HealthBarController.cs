@@ -20,8 +20,13 @@ public class HealthBarController : MonoBehaviour
     [SerializeField] private RectTransform bossHealthIndicator;
     [SerializeField] private RectTransform bossBloodNameFiller;
 
+    [SerializeField] private CanvasGroup finalPopUpCanvasGroup;
+    [SerializeField] private Text helpText;
+
     public static Action startLevelEvent;
     public static Action endLevelEvent;
+    public static Action onBlackFonShowed;
+    public static Action showBlackFon;
 
     private void Awake()
     {
@@ -36,6 +41,7 @@ public class HealthBarController : MonoBehaviour
         
         startLevelEvent += StartHideBlackScreen;
         endLevelEvent += StartShowingBlackScreen;
+        showBlackFon += StartShowingBlackScreen;
         
         SceneController.exitToMenu += DestroySelf;
         SceneController.restartLvl += HideDeathPopup;
@@ -151,6 +157,8 @@ public class HealthBarController : MonoBehaviour
 
             yield return null;
         }
+        
+        onBlackFonShowed?.Invoke();
     }
     
     private IEnumerator HideBlackScreen()
@@ -166,6 +174,45 @@ public class HealthBarController : MonoBehaviour
             yield return null;
         }
     }
+
+    public void ShowEndGamePopup()
+    {
+        StartCoroutine(StartShowingEndGamePopup());
+    }
+
+    private IEnumerator StartShowingEndGamePopup()
+    {
+        var currentAplha = finalPopUpCanvasGroup.alpha;
+
+        while (currentAplha < 1f)
+        {
+            currentAplha += Time.deltaTime;
+            finalPopUpCanvasGroup.alpha = currentAplha;
+            yield return null;
+        }
+
+        StartCoroutine(StartCheckEnterForEndGameAndGoToMenu());
+    }
+
+    private IEnumerator StartCheckEnterForEndGameAndGoToMenu()
+    {
+        var helpTextColor = helpText.color;
+        var currentAlphaHelp = helpTextColor.a;
+
+        while (currentAlphaHelp < 1f)
+        {
+            currentAlphaHelp += Time.deltaTime;
+            helpText.color = new Color(helpTextColor.r, helpTextColor.g, helpTextColor.b, currentAlphaHelp);
+            yield return null;
+        }
+        
+        while (!Input.GetKeyUp(KeyCode.Return))
+        {
+            yield return null;
+        }
+        
+        SceneController.exitToMenu?.Invoke();
+    }
     
     private void DestroySelf()
     {
@@ -180,6 +227,7 @@ public class HealthBarController : MonoBehaviour
         
         startLevelEvent -= StartHideBlackScreen;
         endLevelEvent -= StartShowingBlackScreen;
+        showBlackFon -= StartShowingBlackScreen;
         
         playerHealth.onPersonTakeDamage -= UpdatePlayerHealthBar;
         playerHealth.onPersonHealing -= UpdatePlayerHealthBar;

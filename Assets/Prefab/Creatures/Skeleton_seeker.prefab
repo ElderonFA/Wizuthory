@@ -199,7 +199,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 8368765646668696187}
-  m_Layer: 0
+  m_Layer: 13
   m_Name: LeftSiteAttack
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -232,7 +232,7 @@ GameObject:
   - component: {fileID: 8368765647039083211}
   - component: {fileID: 8368765647039083210}
   - component: {fileID: 8368765647039083221}
-  m_Layer: 0
+  m_Layer: 13
   m_Name: AttackController
   m_TagString: Enemy
   m_Icon: {fileID: 0}
@@ -311,7 +311,7 @@ GameObject:
   - component: {fileID: 8368765647339070827}
   - component: {fileID: 8368765647339070826}
   - component: {fileID: 8368765647339070837}
-  m_Layer: 0
+  m_Layer: 13
   m_Name: MovingController
   m_TagString: Enemy
   m_Icon: {fileID: 0}
@@ -391,7 +391,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 8368765647373635099}
-  m_Layer: 0
+  m_Layer: 13
   m_Name: RightSiteAttack
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -425,7 +425,7 @@ GameObject:
   - component: {fileID: 8368765647696506873}
   - component: {fileID: 8368765647696506878}
   - component: {fileID: 8368765647696506872}
-  m_Layer: 14
+  m_Layer: 13
   m_Name: Health
   m_TagString: HitBox
   m_Icon: {fileID: 0}
@@ -542,7 +542,7 @@ GameObject:
   - component: {fileID: 8368765648264250531}
   - component: {fileID: 8368765648264250528}
   - component: {fileID: 8368765648264250529}
-  m_Layer: 0
+  m_Layer: 13
   m_Name: AttackBox
   m_TagString: DamageAttack
   m_Icon: {fileID: 0}

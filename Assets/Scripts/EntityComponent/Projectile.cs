@@ -6,7 +6,7 @@ using UnityEngine;
 namespace EntityComponent
 {
     [RequireComponent(typeof(CapsuleCollider2D))]
-    public class PlayerProjectile : MonoBehaviour, IProjectile
+    public class Projectile : MonoBehaviour, IProjectile
     {
         [SerializeField] private float damage;
         [SerializeField] private float speed;

@@ -13,14 +13,17 @@ public class SceneController : MonoBehaviour
     private GameObject currentCamera;
     private GameObject confObj;
 
-    private HealthBarController interfaceControllerInstance;
-    private CameraHandler cameraHandlerInstace;
     public static PlayerController playerControllerInstance;
+    private HealthBarController interfaceControllerInstance;
+    private CameraHandler cameraHandlerInstance;
+    private CutSceneController cutSceneController;
+    
     private UiSkillsController uiSkillsControllerInstance;
     
     public static Action<PlayerController> actionGetPlayerController;
     public static Action<HealthBarController> actionGetInterfaceController;
     public static Action<CameraHandler> actionGetCameraHandler;
+    public static Action<CutSceneController> actionGetCutSceneController;
     
     public static Action<UiSkillsController> actionGetUiSkillsController;
     public static Action<PlayerSkills> actionUnlockUiSkill;
@@ -46,10 +49,22 @@ public class SceneController : MonoBehaviour
         actionGetPlayerController += GetPlayerController;
         actionGetInterfaceController += GetInterfaceController;
         actionGetCameraHandler += GetCameraHandler;
+        actionGetCutSceneController += GetCutSceneController;
         actionGetUiSkillsController += GetUiSkillsController;
 
         actionShowBossHealthBar += ShowHealthBossUI;
         actionStartShowBloodOnBossName += HideHealthBossUI;
+    }
+
+    private void GetCutSceneController(CutSceneController csc)
+    {
+        if (cutSceneController != null)
+        {
+            Destroy(csc.gameObject);
+            return;
+        }
+
+        cutSceneController = csc;
     }
 
     private void GetUiSkillsController(UiSkillsController uiSC)
@@ -91,13 +106,13 @@ public class SceneController : MonoBehaviour
     
     private void GetCameraHandler(CameraHandler ch)
     {
-        if (cameraHandlerInstace != null)
+        if (cameraHandlerInstance != null)
         {
             Destroy(ch.gameObject);
             return;
         }
         
-        cameraHandlerInstace = ch;
+        cameraHandlerInstance = ch;
     }
 
     private void DestroySelf()
@@ -114,6 +129,11 @@ public class SceneController : MonoBehaviour
         
         if (Input.GetKeyDown(KeyCode.R))
         {
+            if (!cutSceneController.cutSceneIsEnd)
+            {
+                return;
+            }
+            
             Restart();
         }
         

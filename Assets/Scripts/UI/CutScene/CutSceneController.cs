@@ -43,7 +43,7 @@ public class CutSceneController : MonoBehaviour
     private bool endLevel;
     private bool blackFonWasShow;
     private bool waitForBlackScreen;
-    private bool cutSceneIsEnd;
+    public bool cutSceneIsEnd;
 
     private bool bordersIsShow;
 
@@ -68,6 +68,8 @@ public class CutSceneController : MonoBehaviour
 
     private void Initialize()
     {
+        SceneController.actionGetCutSceneController?.Invoke(this);
+        
         OnStartCutScene += StartCutSceneCoroutine;
         HealthBarController.onBlackFonShowed += SetBlackFonWasShowTrue;
         onEndGame += StartFinalCutScene;

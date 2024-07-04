@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+[RequireComponent(typeof(BoxCollider2D))]
 public class Ladder : MonoBehaviour
 {
     [SerializeField] 
@@ -11,6 +12,9 @@ public class Ladder : MonoBehaviour
     [SerializeField] 
     private Transform downPoint;
     public Transform GetDownPoint => downPoint;
+    [Space] 
+    [SerializeField] 
+    private bool offAfterUse;
 
     public void UseLadder(Transform userTransform)
     {
@@ -22,5 +26,13 @@ public class Ladder : MonoBehaviour
         var downPointDistance = Vector2.Distance(userPos, downPPos);
 
         userTransform.position = upPointDistance > downPointDistance ? upPPos : downPPos;
+
+        if (offAfterUse)
+        {
+            enabled = false;
+
+            var collider = GetComponent<BoxCollider2D>();
+            collider.enabled = false;
+        }
     }
 }

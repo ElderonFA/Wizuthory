@@ -32,7 +32,7 @@ TagManager:
   - ProjectilesColliding
   - Sparks
   - NpcPojectiles
-  - 
+  - EnemyPlayerChecker
   - 
   - 
   - 

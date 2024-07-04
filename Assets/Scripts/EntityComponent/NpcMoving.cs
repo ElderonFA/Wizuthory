@@ -17,7 +17,7 @@ public class NpcMoving : MonoBehaviour
     [SerializeField] private Transform playerTransform;
     [SerializeField] private Animator animator;
     [SerializeField] private SpriteRenderer personView;
-    [SerializeField] private NpcAttack npcAttack;
+    [SerializeField] public NpcAttack npcAttack;
 
     [Header ("MinMaxDelay")]
     [SerializeField] private float minWaitTime;
@@ -28,27 +28,56 @@ public class NpcMoving : MonoBehaviour
 
     private bool _canMove;
     private bool _chasePlayer;
-    private bool _goLeft;
+    public bool _isAttack;
+    public bool _goLeft;
     private bool _takeOppositeLook;
     private Vector2 _actualSpeed;
 
     private float _waitTime;
-    //public bool Stay => _waitTime > 0;
     
     private float _goTime;
-    //public bool Patrol => _goTime > 0;
+
+    private void Start()
+    {
+        npcAttack.playerEnterToAttack += SetIsAttackTrue;
+        npcAttack.playerExitAttack += SetIsAttackFalse;
+        npcAttack.onEnterWalkingLimit += AfterCollideWalkingLimit;
+    }
+
+    private void AfterCollideWalkingLimit()
+    {
+        _waitTime = GetTimeDelay(minWaitTime, maxWaitTime);
+        _goTime = 0;
+
+        _takeOppositeLook = true;
+        _chasePlayer = false;
+    }
+
+    private void SetIsAttackTrue()
+    {
+        UpdateLook();
+        _isAttack = true;
+    }
+    
+    private void SetIsAttackFalse()
+    {
+        _isAttack = false;
+    }
 
     void FixedUpdate()
     {
         UpdateMove();
-        //Debug.Log(_chasePlayer);
     }
-
 
     private void UpdateMove()
     {
         if (!npcHealth.IsAlive || !_canMove)
             return;
+
+        if (_isAttack)
+        {
+            return;
+        }
 
         if (_chasePlayer)
         {
@@ -82,22 +111,20 @@ public class NpcMoving : MonoBehaviour
             }
         } 
         
-        personView.flipX = _goLeft;
-        npcAttack.ChangeAttackPos(_goLeft);
+        UpdateLook();
+    }
+
+    public void UpdateLook()
+    {
+        personView.flipX = !_goLeft;
+        npcAttack.ChangeAttackPos(!_goLeft);
     }
 
     private void UpdateActualSpeed()
     {
         if (_chasePlayer)
         {
-            if (playerTransform.position.x <= transform.position.x)
-            {
-                _goLeft = true;
-            }
-            else
-            {
-                _goLeft = false;
-            }
+            _goLeft = playerTransform.position.x > transform.position.x;
         }
         else
         {
@@ -111,14 +138,14 @@ public class NpcMoving : MonoBehaviour
                 _goLeft = Random.Range(0f, 100f) >= 50f ? false : true;
             }
         }
-
+        
         if (_goLeft)
         {
-            _actualSpeed = -transform.right * speed;
+            _actualSpeed = transform.right * speed;
         }
         else
         {
-            _actualSpeed = transform.right * speed;
+            _actualSpeed = -transform.right * speed;
         }
     }
 
@@ -129,14 +156,6 @@ public class NpcMoving : MonoBehaviour
         if (other.tag == "Player")
         {
             _chasePlayer = true;
-        }
-
-        if (other.tag == "WalkingLimit" && !_chasePlayer)
-        {
-            _waitTime = GetTimeDelay(minWaitTime, maxWaitTime);
-            _goTime = 0;
-
-            _takeOppositeLook = true;
         }
         
         if (other.tag == "Death")

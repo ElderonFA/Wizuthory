@@ -49,4 +49,13 @@ public class Skeleton_seeker_spawn : MonoBehaviour
     {
         npcMoving.SetCanMove();
     }
+
+    public void ChekPlayerForAttack()
+    {
+        if (npcMoving._isAttack)
+        {
+            npcMoving.UpdateLook();
+            anim.SetBool("IsAttack", true);
+        }
+    }
 }

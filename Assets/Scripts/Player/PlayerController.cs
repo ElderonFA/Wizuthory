@@ -177,8 +177,6 @@ public class PlayerController : MonoBehaviour
             {
                 distanceAttack.transform.localPosition = new Vector3(leftPosStaff, distanceAttack.transform.localPosition.y, 1);
                 redSparksSpot.transform.localPosition = new Vector3(leftPosStaff, redSparksSpot.transform.localPosition.y, 1);
-                
-                attackController.UpdateSiteAttack();
             }
         }
 
@@ -193,8 +191,6 @@ public class PlayerController : MonoBehaviour
             {
                 distanceAttack.transform.localPosition = new Vector3(rightPosStaff, distanceAttack.transform.localPosition.y, 1);
                 redSparksSpot.transform.localPosition = new Vector3(rightPosStaff, redSparksSpot.transform.localPosition.y, 1);
-                
-                attackController.UpdateSiteAttack();
             }
         }
 
@@ -391,6 +387,11 @@ public class PlayerController : MonoBehaviour
 
         if (Input.GetMouseButtonDown(0))
         {
+            if (!attack && !dubleAttack)
+            {
+                attackController.UpdateSiteAttack();
+            }
+
             if (anim.GetCurrentAnimatorStateInfo(0).IsName("attack1"))
             {
                 dubleAttack = true;

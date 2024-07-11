@@ -98,7 +98,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7fb55a654c3e0e64a91e2bad4be4a4cc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  maxHp: 300
+  maxHp: 100
   anim: {fileID: 6538824122355705875}
   isImmortal: 0
 --- !u!70 &6538824121877442666

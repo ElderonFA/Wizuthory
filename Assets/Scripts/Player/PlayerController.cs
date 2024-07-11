@@ -10,20 +10,25 @@ using Random = UnityEngine.Random;
 
 public class PlayerController : MonoBehaviour
 {
+    [Header("Parameters")]
     [SerializeField] private float speed;
     [SerializeField] private float jumpPower;
     [SerializeField] private float flySpeed;
 
-    [SerializeField] private AreaEffector2D attackEffector;
-    
+    [Header("Health")]
     [SerializeField] private Health health;
     
+    [Header("Attack")]
+    [SerializeField] private PlayerAttack attackController;
     [SerializeField] private DistanceAttack distanceAttack;
-
+    [SerializeField] private AreaEffector2D attackEffector;
+    
+    [Header("Skills")]
     [SerializeField] private ImagesAnim dodgeAnim;
-    [Space] 
     [SerializeField] private GameObject redSparksSpot;
     [SerializeField] private GameObject redSpark;
+    [Space]
+    public bool isDebug = true;
     
     private float actualSpeed;
     public float ActualSpeed => actualSpeed;
@@ -44,7 +49,8 @@ public class PlayerController : MonoBehaviour
     private bool attack;
     private bool dubleAttack;
 
-    public bool isDubleAttack => dubleAttack;
+    public bool IsAttack => attack;
+    public bool IsDubleAttack => dubleAttack;
 
     private Animator anim;
     private Rigidbody2D rb;
@@ -53,15 +59,19 @@ public class PlayerController : MonoBehaviour
     private int maxHealPotion = 2;
     private int currentCountHealPotion;
     public int GetCountHealPotion => currentCountHealPotion;
+    
+    private List<IItem> canTakeItems = new List<IItem>();
 
     private List<PlayerSkills> availableSkills = new List<PlayerSkills>();
     
     private float rightPosStaff;
     private float leftPosStaff;
 
-    public bool canShoot;
-    public bool canDodge;
-    public bool canRedSparks;
+    private bool canShoot;
+    private bool canDodge;
+    private bool canRedSparks;
+    
+    public static Action<int> onHealPotionCountChange;
 
     public void AddNewSkill(PlayerSkills newSkill)
     {
@@ -89,12 +99,6 @@ public class PlayerController : MonoBehaviour
     {
         currentCountHealPotion = count;
     }
-
-    public static Action<int> onHealPotionCountChange;
-    
-    private List<IItem> canTakeItems = new List<IItem>();
-    
-    public bool isDebug = true;
     
     public void SetCanMove(bool b)
     {
@@ -169,9 +173,13 @@ public class PlayerController : MonoBehaviour
 
             go = true;
 
-            
-            distanceAttack.transform.localPosition = new Vector3(leftPosStaff, distanceAttack.transform.localPosition.y, 1);
-            redSparksSpot.transform.localPosition = new Vector3(leftPosStaff, redSparksSpot.transform.localPosition.y, 1);
+            if (!attack && !dubleAttack)
+            {
+                distanceAttack.transform.localPosition = new Vector3(leftPosStaff, distanceAttack.transform.localPosition.y, 1);
+                redSparksSpot.transform.localPosition = new Vector3(leftPosStaff, redSparksSpot.transform.localPosition.y, 1);
+                
+                attackController.UpdateSiteAttack();
+            }
         }
 
         if (Input.GetKeyDown(KeyCode.D))
@@ -180,9 +188,14 @@ public class PlayerController : MonoBehaviour
             left = false;
 
             go = true;
-            
-            distanceAttack.transform.localPosition = new Vector3(rightPosStaff, distanceAttack.transform.localPosition.y, 1);
-            redSparksSpot.transform.localPosition = new Vector3(rightPosStaff, redSparksSpot.transform.localPosition.y, 1);
+
+            if (!attack && !dubleAttack)
+            {
+                distanceAttack.transform.localPosition = new Vector3(rightPosStaff, distanceAttack.transform.localPosition.y, 1);
+                redSparksSpot.transform.localPosition = new Vector3(rightPosStaff, redSparksSpot.transform.localPosition.y, 1);
+                
+                attackController.UpdateSiteAttack();
+            }
         }
 
         if (Input.GetKeyUp(KeyCode.A))

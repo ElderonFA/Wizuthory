@@ -12,14 +12,11 @@ public class PlayerAttack : MonoBehaviour
     private Vector2 leftSite;
     private Vector2 rightSite;
 
-    void FixedUpdate()
+    public void UpdateSiteAttack()
     {
-        leftSite = new Vector2(leftSiteObject.position.x, leftSiteObject.position.y);
-        rightSite = new Vector2 (rightSiteObject.position.x, rightSiteObject.position.y);
-
-        attackObject.position = pC.isLookLeft ? leftSite : rightSite;
+        attackObject.position = pC.isLookLeft ? leftSiteObject.position : rightSiteObject.position;
         
-        if (pC.isDubleAttack && pC.NameCurrentAnim == "attack2")
+        if (pC.IsDubleAttack && pC.NameCurrentAnim == "attack2")
         {
             if (pC.isLookLeft)
             {
@@ -30,16 +27,5 @@ public class PlayerAttack : MonoBehaviour
                 pC.ChangeAttackAngle(-45);
             }
         }
-    }
-
-    private void UpdateSiteAttack()
-    {
-        if (pC.ActualSpeed == 0f)
-            return;
-
-        leftSite = new Vector2(leftSiteObject.position.x, leftSiteObject.position.y);
-        rightSite = new Vector2 (rightSiteObject.position.x, rightSiteObject.position.y);
-
-        attackObject.position = pC.isLookLeft ? leftSite : rightSite;
     }
 }

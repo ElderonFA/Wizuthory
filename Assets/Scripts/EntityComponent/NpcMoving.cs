@@ -4,8 +4,6 @@ using System.Collections.Generic;
 using UnityEngine;
 using Random = UnityEngine.Random;
 
-//using UnityEngine.Random;
-
 public class NpcMoving : MonoBehaviour
 {
     [Header ("Parameters")]
@@ -41,7 +39,6 @@ public class NpcMoving : MonoBehaviour
     {
         npcAttack.playerEnterToAttack += SetIsAttackTrue;
         npcAttack.playerExitAttack += SetIsAttackFalse;
-        npcAttack.onEnterWalkingLimit += AfterCollideWalkingLimit;
     }
 
     private void AfterCollideWalkingLimit()
@@ -150,6 +147,16 @@ public class NpcMoving : MonoBehaviour
     }
 
     private float GetTimeDelay(float minTime, float maxTime) => Random.Range(minTime, maxTime);
+    
+    public void SetCanMove()
+    {
+        _canMove = true;
+    }
+
+    public void SetPlayerTransform(Transform transform)
+    {
+        playerTransform = transform;
+    }
 
     void OnTriggerEnter2D(Collider2D other)
     {
@@ -162,22 +169,18 @@ public class NpcMoving : MonoBehaviour
         {
             npcHealth.TakeDamage(npcHealth.MaxHp);
         }
-        
-    }
 
-    public void SetCanMove()
-    {
-        _canMove = true;
-    }
-
-    public void SetPlayerTransform(Transform transform)
-    {
-        playerTransform = transform;
+        if (other.tag == "WalkingLimit")
+        {
+            AfterCollideWalkingLimit();
+        }
     }
 
     void OnTriggerExit2D(Collider2D other)
     {
         if (other.tag != "Player")
+        {
             _chasePlayer = false;
+        }
     }
 }

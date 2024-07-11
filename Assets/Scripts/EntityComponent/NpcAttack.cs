@@ -15,7 +15,6 @@ public class NpcAttack : MonoBehaviour
 
     public Action playerEnterToAttack;
     public Action playerExitAttack;
-    public Action onEnterWalkingLimit;
 
     public void ChangeAttackPos(bool left)
     {
@@ -38,11 +37,6 @@ public class NpcAttack : MonoBehaviour
         {
             anim.SetBool("IsAttack", true);
             playerEnterToAttack?.Invoke();
-        }
-
-        if (other.tag == "WalkingLimit")
-        {
-            onEnterWalkingLimit?.Invoke();
         }
     }
     

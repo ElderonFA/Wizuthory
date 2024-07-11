@@ -212,25 +212,27 @@ public class PlayerController : MonoBehaviour
         
         if (Input.GetKeyUp(KeyCode.E))
         {
-            if (canTakeItems.Count > 0 && currentCountHealPotion < maxHealPotion)
+            if (canTakeItems.Count > 0)
             {
                 var firstElement = canTakeItems.FirstOrDefault();
                 if (firstElement == null)
                 {
                     return;
                 }
-                
-                firstElement.CollectItem();
 
-                if (firstElement is HealPotion)
+                if (firstElement is HealPotion && currentCountHealPotion < maxHealPotion)
                 {
                     currentCountHealPotion++;
                     onHealPotionCountChange?.Invoke(currentCountHealPotion);
+                    
+                    firstElement.CollectItem();
                 }
 
                 if (firstElement is UpScroll)
                 {
                     //Здесь может быть эффект или звук
+                    
+                    firstElement.CollectItem();
                 }
             }
 

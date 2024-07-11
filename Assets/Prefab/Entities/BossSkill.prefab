@@ -14,7 +14,7 @@ GameObject:
   - component: {fileID: 9052107111644647297}
   - component: {fileID: 9052107111644647309}
   - component: {fileID: 9052107111644647310}
-  m_Layer: 0
+  m_Layer: 16
   m_Name: BossSkill
   m_TagString: Untagged
   m_Icon: {fileID: 0}

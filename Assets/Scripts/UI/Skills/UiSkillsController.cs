@@ -107,7 +107,8 @@ public class UiSkillsController : MonoBehaviour
 
             yield return null;
         }
-        
+
+        textHelpSkill.text = "Press * to use";
         textHelpSkill.gameObject.SetActive(false);
     }
 

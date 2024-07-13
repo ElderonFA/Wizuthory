@@ -147,7 +147,12 @@ public class SceneController : MonoBehaviour
     {
         SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
         playerControllerInstance.SetHealPotionCount(countHealPotionInStartLvl);
-        PlayerController.onHealPotionCountChange?.Invoke(countHealPotionInStartLvl);
+        
+        if (currentLlv > 1)
+        {
+            PlayerController.onHealPotionCountChange?.Invoke(countHealPotionInStartLvl);
+        }
+        
         restartLvl?.Invoke();
     }
 

@@ -32,3 +32,6 @@ MonoBehaviour:
     - text: Maybe there is something in this box that will relieve my headache?
       person: 1
       sceneEvent: 0
+    - text: For take items Press E
+      person: 0
+      sceneEvent: 0

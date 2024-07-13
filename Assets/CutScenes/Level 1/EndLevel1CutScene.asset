@@ -10,19 +10,16 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 626550de4254de44582f7522208901e0, type: 3}
-  m_Name: First
+  m_Name: EndLevel1CutScene
   m_EditorClassIdentifier: 
   currentCutScene:
     allStep:
-    - text: ...strange sounds...
-      person: 0
-      cameraTarget: {fileID: 0}
-    - text: What is this?
+    - text: Well...
       person: 1
-      cameraTarget: {fileID: 0}
-    - text: RHAAAA!!!
-      person: 2
-      cameraTarget: {fileID: 0}
-    - text: Oh, shit!
+      sceneEvent: 0
+    - text: This is end of cemetry
       person: 1
-      cameraTarget: {fileID: 0}
+      sceneEvent: 0
+    - text: Need move
+      person: 1
+      sceneEvent: 1

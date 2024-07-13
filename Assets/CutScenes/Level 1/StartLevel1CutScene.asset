@@ -10,16 +10,28 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 626550de4254de44582f7522208901e0, type: 3}
-  m_Name: Second
+  m_Name: StartLevel1CutScene
   m_EditorClassIdentifier: 
   currentCutScene:
     allStep:
-    - text: Well...
+    - text: ...
+      person: 0
+      sceneEvent: 2
+    - text: Oh, my head
       person: 1
       sceneEvent: 0
-    - text: This is end of cemetry
+    - text: What happen with me?
       person: 1
       sceneEvent: 0
-    - text: Need move
+    - text: Such a familiar place
       person: 1
-      sceneEvent: 1
+      sceneEvent: 0
+    - text: ' And a strong feeling of deja vu'
+      person: 1
+      sceneEvent: 0
+    - text: Need to find a way out of this place
+      person: 1
+      sceneEvent: 0
+    - text: I don't feel comfortable here
+      person: 1
+      sceneEvent: 0

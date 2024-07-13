@@ -183,13 +183,22 @@ public class CutSceneController : MonoBehaviour
 
         var currentPerson = personsConfigs.First(x => x.personType == cutSceneStep.GetPerson);
 
-        if (currentPerson.personType == Persons.Skeleton)
+        switch (currentPerson.personType)
         {
-            var skeletonAnim = currentPerson.personPosition.gameObject.GetComponent<Animator>();
-            if (skeletonAnim.enabled == false)
-            {
-                skeletonAnim.enabled = true;
-            }
+            case Persons.Player:
+                cinemachineVirtualCamera.Follow = currentPerson.personPosition;
+                break;
+            case Persons.Skeleton:
+                var skeleton = GameObject.Find("SkeletonFromCutScene");
+            
+                var skeletonAnim = skeleton.GetComponent<Animator>();
+                if (skeletonAnim.enabled == false)
+                {
+                    skeletonAnim.enabled = true;
+                }
+
+                cinemachineVirtualCamera.Follow = skeleton.transform;
+                break;
         }
 
         var sprite = currentPerson.personIcon;
@@ -201,12 +210,6 @@ public class CutSceneController : MonoBehaviour
         else
         {
             imagePlace.color = new Color(1f, 1f, 1f, 0f);
-        }
-
-        var target = currentPerson.personPosition;
-        if (target)
-        {
-            cinemachineVirtualCamera.Follow = target;
         }
 
         var sceneEvent = cutSceneStep.GetEvent;

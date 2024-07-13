@@ -145,6 +145,11 @@ public class CutSceneController : MonoBehaviour
             clickToContinue.color = new Color(1f, 1f, 1f, alph);
             yield return null;
         }
+
+        while (!Input.GetMouseButtonDown(0))
+        {
+            yield return null;
+        }
         
         StartCoroutine(HideBordersAnim());
         clickToContinue.color = new Color(1f, 1f, 1f, 0f);

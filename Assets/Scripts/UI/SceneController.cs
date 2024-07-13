@@ -205,7 +205,19 @@ public class SceneController : MonoBehaviour
 
     public void OnDestroy()
     {
-        exitToMenu -= DestroySelf;
+        exitToMenu -= LoadMenu;
         toNewLevel -= LoadLevel;
+
+        actionGetPlayerController -= GetPlayerController;
+        actionGetInterfaceController -= GetInterfaceController;
+        actionGetCameraHandler -= GetCameraHandler;
+        actionGetCutSceneController -= GetCutSceneController;
+        actionGetUiSkillsController -= GetUiSkillsController;
+
+        actionShowBossHealthBar -= ShowHealthBossUI;
+        actionStartShowBloodOnBossName -= HideHealthBossUI;
+        
+        actionUnlockUiSkill -= uiSkillsControllerInstance.UnlockUiSkill;
+        actionUseUiSkill -= uiSkillsControllerInstance.UseUiSkill;
     }
 }

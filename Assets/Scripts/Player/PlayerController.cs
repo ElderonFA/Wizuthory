@@ -535,5 +535,9 @@ public class PlayerController : MonoBehaviour
     {
         SceneController.exitToMenu -= DestroySelf;
         SceneController.restartLvl -= Respawn;
+        
+        health.onPersonDead -= PlayDeadAnim;
+        
+        dodgeAnim.endEvent -= OffImmortal;
     }
 }

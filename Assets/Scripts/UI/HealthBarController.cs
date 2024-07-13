@@ -26,6 +26,7 @@ public class HealthBarController : MonoBehaviour
     public static Action startLevelEvent;
     public static Action endLevelEvent;
     public static Action onBlackFonShowed;
+    public static Action onBlackFonHide;
     public static Action showBlackFon;
 
     private void Awake()
@@ -173,6 +174,8 @@ public class HealthBarController : MonoBehaviour
 
             yield return null;
         }
+        
+        onBlackFonHide?.Invoke();
     }
 
     public void ShowEndGamePopup()

@@ -72,7 +72,13 @@ public class CutSceneController : MonoBehaviour
         
         OnStartCutScene += StartCutSceneCoroutine;
         HealthBarController.onBlackFonShowed += SetBlackFonWasShowTrue;
+        HealthBarController.onBlackFonHide += SetBlackFonWasShowFalse;
         onEndGame += StartFinalCutScene;
+    }
+
+    private void SetBlackFonWasShowFalse()
+    {
+        blackFonWasShow = false;
     }
 
     private void SetBlackFonWasShowTrue()
@@ -126,12 +132,6 @@ public class CutSceneController : MonoBehaviour
                     currentStepIdx++;
                     ShowStep(allStep[currentStepIdx], leftImage);
                     textShowDelay = startDelay;
-                    
-                    if (endLevel)
-                    {
-                        SceneController.toNewLevel?.Invoke(SceneManager.GetActiveScene().buildIndex + 1);
-                        endLevel = false;
-                    }
                 }
             }
             
@@ -145,28 +145,30 @@ public class CutSceneController : MonoBehaviour
             clickToContinue.color = new Color(1f, 1f, 1f, alph);
             yield return null;
         }
-
-        while (!Input.GetMouseButtonDown(0))
-        {
-            if (endLevel && blackFonWasShow)
-            {
-                HealthBarController.endLevelEvent?.Invoke();
-            }
-            
-            yield return null;
-        }
         
         StartCoroutine(HideBordersAnim());
         clickToContinue.color = new Color(1f, 1f, 1f, 0f);
-        playerController.SetCanMove(true);
 
         while (bordersIsShow)
         {
             yield return null;
         }
         
+        if (endLevel)
+        {
+            HealthBarController.endLevelEvent?.Invoke();
+            
+            while (!blackFonWasShow)
+            {
+                yield return null;
+            }
+            
+            SceneController.toNewLevel?.Invoke(SceneManager.GetActiveScene().buildIndex + 1);
+            endLevel = false;
+        }
+        
+        playerController.SetCanMove(true);
         cutSceneIsEnd = true;
-        blackFonWasShow = false;
         waitForBlackScreen = false;
     }
     

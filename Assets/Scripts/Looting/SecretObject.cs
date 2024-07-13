@@ -23,6 +23,8 @@ public class SecretObject : MonoBehaviour, IObjectWithItems
 
     private int countCompletedActionsForSecret;
 
+    private bool itemsWasDropped;
+
     public Action neededActionIsDo;
 
     private Coroutine currentDelayBeforeNewAction;
@@ -107,9 +109,14 @@ public class SecretObject : MonoBehaviour, IObjectWithItems
 
     public void DropItems()
     {
-        for (var i = 0; i < itemsCount; i++)
+        if (!itemsWasDropped)
         {
-            Instantiate(currentItem, transform.position, Quaternion.identity);
+            for (var i = 0; i < itemsCount; i++)
+            {
+                Instantiate(currentItem, transform.position, Quaternion.identity);
+            }
+
+            itemsWasDropped = true;
         }
     }
 }

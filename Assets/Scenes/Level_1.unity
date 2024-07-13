@@ -8580,6 +8580,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Skeleton_seeker
       objectReference: {fileID: 0}
+    - target: {fileID: 8368765647039083221, guid: 7ae4da8ce5af2e1489f851f6bc740cf3, type: 3}
+      propertyPath: m_Size.x
+      value: 0.76
+      objectReference: {fileID: 0}
     - target: {fileID: 8368765647339070837, guid: 7ae4da8ce5af2e1489f851f6bc740cf3, type: 3}
       propertyPath: m_Size.x
       value: 0.91
@@ -19118,7 +19122,7 @@ MonoBehaviour:
   topBorder: {fileID: 1346643889}
   bottomBorder: {fileID: 831232189}
   textField: {fileID: 1834994924}
-  textShowDelay: 1
+  textShowDelay: 0.5
   clickToContinue: {fileID: 1869416139}
   leftImage: {fileID: 1811729512}
   rightImage: {fileID: 988012222}

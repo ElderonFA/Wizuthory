@@ -14,6 +14,12 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   currentCutScene:
     allStep:
-    - text: Go to next level
-      person: 0
+    - text: I see big tower on horizont
+      person: 1
+      sceneEvent: 0
+    - text: I'll try get to the tower and look around
+      person: 1
+      sceneEvent: 0
+    - text: Go ahead!
+      person: 1
       sceneEvent: 1

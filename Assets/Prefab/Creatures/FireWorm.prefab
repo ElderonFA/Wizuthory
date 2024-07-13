@@ -241,6 +241,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   npcRangeAttackController: {fileID: 6538824123704849542}
   health: {fileID: 6538824121877442668}
+  deadSprite: {fileID: -1686483036, guid: 83b50d774b1a89b45be8371d782bcb91, type: 3}
   speed: 150
 --- !u!70 &6538824122355705868
 CapsuleCollider2D:
@@ -255,8 +256,8 @@ CapsuleCollider2D:
   m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: 0.04, y: 0.15}
-  m_Size: {x: 0.56, y: 0.29}
+  m_Offset: {x: 0.13, y: 0.15}
+  m_Size: {x: 0.3, y: 0.3}
   m_Direction: 1
 --- !u!50 &6538824122355705871
 Rigidbody2D:
@@ -278,7 +279,7 @@ Rigidbody2D:
   m_Interpolate: 0
   m_SleepingMode: 1
   m_CollisionDetection: 0
-  m_Constraints: 0
+  m_Constraints: 4
 --- !u!1 &6538824122390157472
 GameObject:
   m_ObjectHideFlags: 0

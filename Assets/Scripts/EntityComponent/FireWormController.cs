@@ -51,7 +51,6 @@ public class FireWormController : MonoBehaviour
         rb = GetComponent<Rigidbody2D>();
         
         health.onPersonDead += PlayDeadAnim;
-        health.onPersonTakeDamage += PlayTakeHitAnim;
         
         npcRangeAttackController.onFindPlayer += StopMoving;
         npcRangeAttackController.onLosePlayer += StartStay;
@@ -128,11 +127,6 @@ public class FireWormController : MonoBehaviour
     {
         health.enabled = false;
         anim.SetBool("playDead", true);
-    }
-    
-    private void PlayTakeHitAnim()
-    {
-        anim.SetBool("isTakeHit", true);
     }
 
     public void SetFalseForDeadAnim()

@@ -63,9 +63,13 @@ public class Health : MonoBehaviour
         anim.SetBool("isAlive", isAlive);
 
         if (isAlive)
+        {
             anim.SetBool("isTakeHit", true);
+        }
         else
+        {
             onPersonDead?.Invoke();
+        }
     }
 
     public void Heal(float healCount)

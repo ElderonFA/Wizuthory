@@ -13,6 +13,7 @@ public class HealthBarController : MonoBehaviour
     [SerializeField] private DeathPopup deathPopup;
 
     [SerializeField] private GameObject healthPotionInterfaceElements;
+    [SerializeField] private Text helpHealPotion;
     [SerializeField] private Text healPotionCountText;
 
     [SerializeField] private GameObject healthBarObj;
@@ -61,9 +62,48 @@ public class HealthBarController : MonoBehaviour
         if (healthPotionInterfaceElements.activeSelf == false)
         {
             healthPotionInterfaceElements.SetActive(true);
+            StartCoroutine(ShowHelpTextUseHealPotion());
         }
         
         healPotionCountText.text = count.ToString();
+    }
+
+    private IEnumerator ShowHelpTextUseHealPotion()
+    {
+        var showingTime = 3f;
+        var currentTime = 0f;
+        var currentAlpha = 0.33f;
+        var appearance = true;
+
+        while (currentTime < showingTime)
+        {
+            currentTime += Time.deltaTime;
+
+            if (appearance)
+            {
+                currentAlpha += Time.deltaTime;
+
+                if (currentAlpha >= 1f)
+                {
+                    appearance = false;
+                }
+            }
+            else
+            {
+                currentAlpha -= Time.deltaTime;
+
+                if (currentAlpha <= 0.33f)
+                {
+                    appearance = true;
+                }
+            }
+
+            helpHealPotion.color = new Color(helpHealPotion.color.r, helpHealPotion.color.g, helpHealPotion.color.b, currentAlpha);
+            
+            yield return null;
+        }
+        
+        helpHealPotion.gameObject.SetActive(false);
     }
 
     private void HideDeathPopup()

@@ -161,12 +161,6 @@ public class SceneController : MonoBehaviour
         SceneManager.LoadScene(levelNum);
         HealthBarController.startLevelEvent?.Invoke();
 
-        if (currentLlv > 1)
-        {
-            countHealPotionInStartLvl = playerControllerInstance.GetCountHealPotion;
-            PlayerController.onHealPotionCountChange?.Invoke(countHealPotionInStartLvl);
-        }
-
         currentLlv++;
 
         if (currentCamera == null)

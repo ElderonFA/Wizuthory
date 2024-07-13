@@ -129,6 +129,20 @@ public class CutSceneController : MonoBehaviour
                 
                 if (Input.GetMouseButtonDown(0))
                 {
+                    //Переход между уровнями в середине катсцен
+                    if (endLevel)
+                    {
+                        HealthBarController.endLevelEvent?.Invoke();
+            
+                        while (!blackFonWasShow)
+                        {
+                            yield return null;
+                        }
+            
+                        SceneController.toNewLevel?.Invoke(SceneManager.GetActiveScene().buildIndex + 1);
+                        endLevel = false;
+                    }
+                    
                     currentStepIdx++;
                     ShowStep(allStep[currentStepIdx], leftImage);
                     textShowDelay = startDelay;

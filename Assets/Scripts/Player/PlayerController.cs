@@ -28,7 +28,7 @@ public class PlayerController : MonoBehaviour
     [SerializeField] private GameObject redSparksSpot;
     [SerializeField] private GameObject redSpark;
     [Space]
-    public bool isDebug = true;
+    public bool isDebug = false;
     
     private float actualSpeed;
     public float ActualSpeed => actualSpeed;

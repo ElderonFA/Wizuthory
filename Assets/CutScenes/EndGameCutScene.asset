@@ -28,10 +28,10 @@ MonoBehaviour:
       sceneEvent: 0
     - text: '!wQabqNe#11u#p#'
       person: 0
-      sceneEvent: 8
+      sceneEvent: 1
     - text: ...
       person: 0
-      sceneEvent: 1
+      sceneEvent: 0
     - text: What hapen with me?
       person: 1
       sceneEvent: 0

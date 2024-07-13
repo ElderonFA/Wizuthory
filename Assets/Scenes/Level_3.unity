@@ -6211,9 +6211,77 @@ Transform:
   - {fileID: 937900416}
   - {fileID: 1305214615}
   - {fileID: 2086838711}
+  - {fileID: 732061048}
+  - {fileID: 1300609906}
   m_Father: {fileID: 0}
   m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1001 &732061047
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    m_TransformParent: {fileID: 729715932}
+    m_Modifications:
+    - target: {fileID: 3105384379911847164, guid: 20bba0c24ef5db44baf57157fa6f018b, type: 3}
+      propertyPath: m_RootOrder
+      value: 14
+      objectReference: {fileID: 0}
+    - target: {fileID: 3105384379911847164, guid: 20bba0c24ef5db44baf57157fa6f018b, type: 3}
+      propertyPath: m_LocalScale.x
+      value: -1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3105384379911847164, guid: 20bba0c24ef5db44baf57157fa6f018b, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 19.271246
+      objectReference: {fileID: 0}
+    - target: {fileID: 3105384379911847164, guid: 20bba0c24ef5db44baf57157fa6f018b, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: -1.3410516
+      objectReference: {fileID: 0}
+    - target: {fileID: 3105384379911847164, guid: 20bba0c24ef5db44baf57157fa6f018b, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0.0038569146
+      objectReference: {fileID: 0}
+    - target: {fileID: 3105384379911847164, guid: 20bba0c24ef5db44baf57157fa6f018b, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3105384379911847164, guid: 20bba0c24ef5db44baf57157fa6f018b, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3105384379911847164, guid: 20bba0c24ef5db44baf57157fa6f018b, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3105384379911847164, guid: 20bba0c24ef5db44baf57157fa6f018b, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3105384379911847164, guid: 20bba0c24ef5db44baf57157fa6f018b, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3105384379911847164, guid: 20bba0c24ef5db44baf57157fa6f018b, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3105384379911847164, guid: 20bba0c24ef5db44baf57157fa6f018b, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4601156296251125959, guid: 20bba0c24ef5db44baf57157fa6f018b, type: 3}
+      propertyPath: m_Name
+      value: Crash bridge (1)
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 20bba0c24ef5db44baf57157fa6f018b, type: 3}
+--- !u!4 &732061048 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 3105384379911847164, guid: 20bba0c24ef5db44baf57157fa6f018b, type: 3}
+  m_PrefabInstance: {fileID: 732061047}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &742683433
 GameObject:
   m_ObjectHideFlags: 0
@@ -8649,6 +8717,68 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!1001 &1300609905
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    m_TransformParent: {fileID: 729715932}
+    m_Modifications:
+    - target: {fileID: 3105384379911847164, guid: 20bba0c24ef5db44baf57157fa6f018b, type: 3}
+      propertyPath: m_RootOrder
+      value: 15
+      objectReference: {fileID: 0}
+    - target: {fileID: 3105384379911847164, guid: 20bba0c24ef5db44baf57157fa6f018b, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 17.503246
+      objectReference: {fileID: 0}
+    - target: {fileID: 3105384379911847164, guid: 20bba0c24ef5db44baf57157fa6f018b, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: -1.2520516
+      objectReference: {fileID: 0}
+    - target: {fileID: 3105384379911847164, guid: 20bba0c24ef5db44baf57157fa6f018b, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0.0038569146
+      objectReference: {fileID: 0}
+    - target: {fileID: 3105384379911847164, guid: 20bba0c24ef5db44baf57157fa6f018b, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3105384379911847164, guid: 20bba0c24ef5db44baf57157fa6f018b, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3105384379911847164, guid: 20bba0c24ef5db44baf57157fa6f018b, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3105384379911847164, guid: 20bba0c24ef5db44baf57157fa6f018b, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3105384379911847164, guid: 20bba0c24ef5db44baf57157fa6f018b, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3105384379911847164, guid: 20bba0c24ef5db44baf57157fa6f018b, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3105384379911847164, guid: 20bba0c24ef5db44baf57157fa6f018b, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4601156296251125959, guid: 20bba0c24ef5db44baf57157fa6f018b, type: 3}
+      propertyPath: m_Name
+      value: Crash bridge
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 20bba0c24ef5db44baf57157fa6f018b, type: 3}
+--- !u!4 &1300609906 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 3105384379911847164, guid: 20bba0c24ef5db44baf57157fa6f018b, type: 3}
+  m_PrefabInstance: {fileID: 1300609905}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1305214614
 GameObject:
   m_ObjectHideFlags: 0

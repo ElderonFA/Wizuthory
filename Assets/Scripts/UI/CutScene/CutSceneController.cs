@@ -34,6 +34,8 @@ public class CutSceneController : MonoBehaviour
     [SerializeField] private Image rightImage;
     [Space] 
     [SerializeField] private List<PersonInCutscenes> personsConfigs;
+    [Space] 
+    [SerializeField] private Image skipView;
 
     [SerializeField] 
     private CutSceneConfig finalCutScene;
@@ -52,6 +54,9 @@ public class CutSceneController : MonoBehaviour
     private BossController bossController;
 
     public Action onEndGame;
+
+    private float skipCutSceneTimer;
+    private float timeToHoldForSkipCutScene = 1f;
     
     [Serializable]
     public class PersonInCutscenes
@@ -115,6 +120,46 @@ public class CutSceneController : MonoBehaviour
 
         while (currentStepIdx < allStep.Length - 1)
         {
+            if (Input.GetKey(KeyCode.Tab))
+            {
+                skipCutSceneTimer += Time.deltaTime * 2f;
+                skipView.fillAmount = timeToHoldForSkipCutScene * skipCutSceneTimer;
+                
+                if (skipCutSceneTimer >= timeToHoldForSkipCutScene)
+                {
+                    playerController.SetCanMove(true);
+                    cutSceneIsEnd = true;
+                    waitForBlackScreen = false;
+                    skipCutSceneTimer = 0f;
+
+                    foreach (var cutSceneStep in allStep)
+                    {
+                        ShowStep(cutSceneStep, leftImage);
+
+                        if (cutSceneStep.GetEvent == CutSceneEvents.EndLevel)
+                        {
+                            SceneController.toNewLevel?.Invoke(SceneManager.GetActiveScene().buildIndex + 1);
+                            endLevel = false;
+                        }
+                    }
+                    
+                    StartCoroutine(HideBordersAnim());
+                    clickToContinue.color = new Color(1f, 1f, 1f, 0f);
+
+                    while (bordersIsShow)
+                    {
+                        yield return null;
+                    }
+                    
+                    yield break;
+                }
+            }
+            else
+            {
+                skipCutSceneTimer = 0f;
+                skipView.fillAmount = 0f;
+            }
+
             if (textShowDelay > 0)
             {
                 textShowDelay -= Time.deltaTime;
